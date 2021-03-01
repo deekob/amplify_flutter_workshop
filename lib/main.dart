@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:amplify_flutter/amplify.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'amplifyconfiguration.dart';
 
 import 'login_page.dart';
 import 'sign_up_page.dart';
@@ -17,11 +20,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  //final _amplify = Amplify();
   final _authService = AuthService();
   @override
   void initState() {
     super.initState();
-    _authService.showLogin();
+    _configureAmplify();
+    _authService.checkAuthStatus();
   }
 
   @override
@@ -75,5 +80,17 @@ class _MyAppState extends State<MyApp> {
             }
           }),
     );
+  }
+
+  void _configureAmplify() async {
+    AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
+    Amplify.addPlugins([authPlugin]);
+    try {
+      await Amplify.configure(amplifyconfig);
+      print('Successfully configured Amplify 🎉');
+    } catch (e) {
+      print(e);
+      print('Could not configure Amplify ☠️');
+    }
   }
 }
