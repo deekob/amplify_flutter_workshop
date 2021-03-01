@@ -29,7 +29,22 @@ const amplifyconfig = ''' {
                     "Default": {
                         "authenticationFlowType": "USER_SRP_AUTH"
                     }
+                },
+                "S3TransferUtility": {
+                    "Default": {
+                        "Bucket": "photogallery2026f5a4faae40cebd58f6a8278217f2155336-dev",
+                        "Region": "ap-southeast-2"
+                    }
                 }
+            }
+        }
+    },
+    "storage": {
+        "plugins": {
+            "awsS3StoragePlugin": {
+                "bucket": "photogallery2026f5a4faae40cebd58f6a8278217f2155336-dev",
+                "region": "ap-southeast-2",
+                "defaultAccessLevel": "guest"
             }
         }
     }
