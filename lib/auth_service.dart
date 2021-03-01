@@ -46,8 +46,8 @@ class AuthService {
         // 4
         print('User could not be signed in');
       }
-    } on AuthError catch (authError) {
-      print('Could not login - ${authError.cause}');
+    } on AmplifyException catch (authError) {
+      print('Could not login - ${authError.message}');
     }
   }
 
@@ -76,8 +76,8 @@ class AuthService {
       }
 
       // 7
-    } on AuthError catch (authError) {
-      print('Failed to sign up - ${authError.cause}');
+    } on AmplifyException catch (authError) {
+      print('Failed to sign up - ${authError.message}');
     }
   }
 
@@ -94,8 +94,8 @@ class AuthService {
         // 4
         // Follow more steps
       }
-    } on AuthError catch (authError) {
-      print('Could not verify code - ${authError.cause}');
+    } on AmplifyException catch (authError) {
+      print('Could not verify code - ${authError.message}');
     }
   }
 
@@ -106,8 +106,8 @@ class AuthService {
 
       // 2
       showLogin();
-    } on AuthError catch (authError) {
-      print('Could not log out - ${authError.cause}');
+    } on AmplifyException catch (authError) {
+      print('Could not log out - ${authError.message}');
     }
   }
 
