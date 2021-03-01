@@ -1,10 +1,10 @@
 {
-  "auth": {
-    "photogallery0a356bed": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  }
+	"auth": {
+		"photogallery71797b5e": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
 }

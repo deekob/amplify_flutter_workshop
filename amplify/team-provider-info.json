@@ -1,20 +1,20 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-photogallery-dev-155336-authRole",
-      "UnauthRoleArn": "arn:aws:iam::821617795058:role/amplify-photogallery-dev-155336-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::821617795058:role/amplify-photogallery-dev-155336-authRole",
-      "Region": "ap-southeast-2",
-      "DeploymentBucketName": "amplify-photogallery-dev-155336-deployment",
-      "UnauthRoleName": "amplify-photogallery-dev-155336-unauthRole",
-      "StackName": "amplify-photogallery-dev-155336",
-      "StackId": "arn:aws:cloudformation:ap-southeast-2:821617795058:stack/amplify-photogallery-dev-155336/97079370-77ee-11eb-a2fe-064fe573198c",
-      "AmplifyAppId": "d3gdsiwrancnnj"
-    },
-    "categories": {
-      "auth": {
-        "photogallery0a356bed": {}
-      }
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-photogallery-dev-155336-authRole",
+            "UnauthRoleArn": "arn:aws:iam::821617795058:role/amplify-photogallery-dev-155336-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::821617795058:role/amplify-photogallery-dev-155336-authRole",
+            "Region": "ap-southeast-2",
+            "DeploymentBucketName": "amplify-photogallery-dev-155336-deployment",
+            "UnauthRoleName": "amplify-photogallery-dev-155336-unauthRole",
+            "StackName": "amplify-photogallery-dev-155336",
+            "StackId": "arn:aws:cloudformation:ap-southeast-2:821617795058:stack/amplify-photogallery-dev-155336/97079370-77ee-11eb-a2fe-064fe573198c",
+            "AmplifyAppId": "d3gdsiwrancnnj"
+        },
+        "categories": {
+            "auth": {
+                "photogallery71797b5e": {}
+            }
+        }
     }
-  }
 }
