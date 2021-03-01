@@ -7,9 +7,10 @@
 			"customAuth": false
 		}
 	},
-	"storage": {
-		"s346731f35": {
-			"service": "S3",
+	"storage": {},
+	"analytics": {
+		"photogallery": {
+			"service": "Pinpoint",
 			"providerPlugin": "awscloudformation"
 		}
 	}

@@ -35,6 +35,17 @@ const amplifyconfig = ''' {
                         "Bucket": "photogallery2026f5a4faae40cebd58f6a8278217f2155336-dev",
                         "Region": "ap-southeast-2"
                     }
+                },
+                "PinpointAnalytics": {
+                    "Default": {
+                        "AppId": "d604e93a93fa4aed88687ff8aec55bab",
+                        "Region": "us-west-2"
+                    }
+                },
+                "PinpointTargeting": {
+                    "Default": {
+                        "Region": "us-west-2"
+                    }
                 }
             }
         }
@@ -45,6 +56,19 @@ const amplifyconfig = ''' {
                 "bucket": "photogallery2026f5a4faae40cebd58f6a8278217f2155336-dev",
                 "region": "ap-southeast-2",
                 "defaultAccessLevel": "guest"
+            }
+        }
+    },
+    "analytics": {
+        "plugins": {
+            "awsPinpointAnalyticsPlugin": {
+                "pinpointAnalytics": {
+                    "appId": "d604e93a93fa4aed88687ff8aec55bab",
+                    "region": "us-west-2"
+                },
+                "pinpointTargeting": {
+                    "region": "us-west-2"
+                }
             }
         }
     }
