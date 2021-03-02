@@ -1,8 +1,5 @@
-# flutter_application_1
+# Amplify and Flutter Workshop
 
-Implementation of below tutorial
-
-[https://aws.amazon.com/getting-started/hands-on/build-flutter-app-amplify](https://aws.amazon.com/getting-started/hands-on/build-flutter-app-amplify)
 
 
 (sudo) npm install -g @aws-amplify/cli
@@ -19,3 +16,12 @@ amplify add auth
 amplify add analytics
 
 amplify push
+
+
+
+
+
+
+Implementation of below tutorial
+
+[https://aws.amazon.com/getting-started/hands-on/build-flutter-app-amplify](https://aws.amazon.com/getting-started/hands-on/build-flutter-app-amplify)
