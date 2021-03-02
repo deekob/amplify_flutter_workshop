@@ -24,7 +24,6 @@ dependencies:
   camera: ^0.7.0
   path:
   path_provider: ^1.6.27
-  amplify_storage_s3: '<1.0.0'
   amplify_flutter: '<1.0.0'
   amplify_core: '<1.0.0'
   amplify_auth_cognito: '<1.0.0'

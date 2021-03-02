@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-workshopapp-dev-72345-authRole",
+      "UnauthRoleArn": "arn:aws:iam::821617795058:role/amplify-workshopapp-dev-72345-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::821617795058:role/amplify-workshopapp-dev-72345-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-workshopapp-dev-72345-deployment",
+      "UnauthRoleName": "amplify-workshopapp-dev-72345-unauthRole",
+      "StackName": "amplify-workshopapp-dev-72345",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:821617795058:stack/amplify-workshopapp-dev-72345/310f1e30-7b95-11eb-997f-0a00fa1f37c6",
+      "AmplifyAppId": "d3e1fj1fsofiws"
+    },
+    "categories": {
+      "auth": {
+        "workshopapp679a0924": {}
+      }
+    }
+  }
+}

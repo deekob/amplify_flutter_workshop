@@ -5,6 +5,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'login_page.dart';
 import 'sign_up_page.dart';
 import 'auth_service.dart';
+import 'gallery_page.dart';
 import 'verification_page.dart';
 
 void main() {
@@ -60,7 +61,8 @@ class _MyAppState extends State<MyApp> {
                                 _authService.verifyCode)),
                   // Show Camera Flow
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
-                    MaterialPage(child: Placeholder())
+                    MaterialPage(
+                        child: GalleryPage(shouldLogOut: _authService.logOut))
                 ],
                 onPopPage: (route, result) => route.didPop(result),
               );
@@ -77,6 +79,7 @@ class _MyAppState extends State<MyApp> {
 
   void _configureAmplify() async {
     AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
+    Amplify.addPlugins([authPlugin]);
     try {
       await Amplify.configure(amplifyconfig);
       print(' ---------------------------- Successfully configured Amplify 🎉');
