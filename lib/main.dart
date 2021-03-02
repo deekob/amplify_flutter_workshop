@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'amplifyconfiguration.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_storage_s3/amplify_storage_s3.dart';
-
 import 'login_page.dart';
 import 'sign_up_page.dart';
-import 'camera_flow.dart';
 import 'auth_service.dart';
 import 'verification_page.dart';
 
@@ -21,7 +18,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //final _amplify = Amplify();
   final _authService = AuthService();
   @override
   void initState() {
@@ -33,17 +29,14 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Photo Gallery App',
+      title: 'Workshop App',
       theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
       home: StreamBuilder<AuthState>(
-          // 2
           stream: _authService.authStateController.stream,
           builder: (context, snapshot) {
-            // 3
             if (snapshot.hasData) {
               return Navigator(
                 pages: [
-                  // 4
                   // Show Login Page
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
                     MaterialPage(
@@ -67,8 +60,7 @@ class _MyAppState extends State<MyApp> {
                                 _authService.verifyCode)),
                   // Show Camera Flow
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
-                    MaterialPage(
-                        child: CameraFlow(shouldLogOut: _authService.logOut))
+                    MaterialPage(child: Placeholder())
                 ],
                 onPopPage: (route, result) => route.didPop(result),
               );
@@ -84,9 +76,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _configureAmplify() async {
-    AmplifyStorageS3 storagePlugin = AmplifyStorageS3();
     AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
-    Amplify.addPlugins([authPlugin, storagePlugin]);
     try {
       await Amplify.configure(amplifyconfig);
       print(' ---------------------------- Successfully configured Amplify 🎉');

@@ -19,20 +19,3 @@ class SignUpEvent extends AbstractAnalyticsEvent {
 class VerificationEvent extends AbstractAnalyticsEvent {
   VerificationEvent() : super.withName(eventName: 'verification');
 }
-
-class ViewGalleryEvent extends AbstractAnalyticsEvent {
-  ViewGalleryEvent() : super.withName(eventName: 'view_gallery');
-}
-
-class TakePictureEvent extends AbstractAnalyticsEvent {
-  // 1
-  TakePictureEvent._fromEvent(AnalyticsEvent event)
-      : super.withEvent(event: event);
-
-  // 2
-  factory TakePictureEvent({String cameraDirection}) {
-    final event = AnalyticsEvent('take_picture');
-    event.properties.addStringProperty('camera_direction', cameraDirection);
-    return TakePictureEvent._fromEvent(event);
-  }
-}
