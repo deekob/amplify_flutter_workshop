@@ -10,11 +10,7 @@ Lab 1 is a pre-requisite to be able to complete Labs 2 and/or 3.
 
 In order to complete this workshop you'll need an AWS Account with sufficient permission to create AWS IAM, Amazon DynamoDB, Amazon Cognito and AWS Amplify resources.
 
-## The Labs
 
-* [Lab 1](./lab1-Building_Chat_Bots_With_Lex/README.md) - Building your first Amazon Lex chatbot
-* [Lab 2](./lab2-Building_Web_App_With_Amplify/README.md) - Building your Web App with Amplify and configuring LEX
-* [Lab 3 - Optional](./lab3-Building_Amazon_Connect_Contact_Center_Environment) - Creating your first call center using Amazon Connect and configuring LEX
 
 ## Questions and Contact
 
