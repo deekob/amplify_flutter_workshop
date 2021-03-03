@@ -4,4 +4,6 @@
 * [Flutter](https://flutter.dev/docs/get-started/install) version 1.20.0 or higher
 * A device [emulator*](https://developer.android.com/studio) to run the Flutter application on
 * An [editor*](https://flutter.dev/docs/get-started/editor?tab=vscode) that is compatible with Flutter
-* Install Amplify CLI by running: (sudo) npm install -g @aws-amplify/cli
+* Install and configure [Amplify CLI](https://docs.amplify.aws/cli/start/install#option-2-follow-the-instructions) 
+
+[<- Back](../README.md) || [Lab 1 ->](../lab1/README.md) 
