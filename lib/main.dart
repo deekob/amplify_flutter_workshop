@@ -59,7 +59,6 @@ class _MyAppState extends State<MyApp> {
                         child: VerificationPage(
                             didProvideVerificationCode:
                                 _authService.verifyCode)),
-                  // Show Camera Flow
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
                     MaterialPage(
                         child: GalleryPage(shouldLogOut: _authService.logOut))
