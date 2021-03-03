@@ -103,3 +103,7 @@ amplify add analytics
 ``` bash
 amplify push
 ```
+
+
+[Next ->](../lab2/README.md) 
+[<- Back](../README.md) 
