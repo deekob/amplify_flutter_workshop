@@ -104,6 +104,4 @@ amplify add analytics
 amplify push
 ```
 
-
-[Next ->](../lab2/README.md) 
-[<- Back](../README.md) 
+[<- Prerequisites](../prerequisites/README.md) || [Lab2 ->](../lab2/README.md) 

@@ -6,4 +6,4 @@
 * An [editor*](https://flutter.dev/docs/get-started/editor?tab=vscode) that is compatible with Flutter
 * Install and configure [Amplify CLI](https://docs.amplify.aws/cli/start/install#option-2-follow-the-instructions) 
 
-[<- Back](../README.md) 
+[<- Back](../README.md) || [Lab 1 ->](../lab1/README.md) 
