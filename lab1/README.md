@@ -20,9 +20,15 @@ Callbacks - In order to send data from one object to another, we will be using c
 ## Implementation
 
 ### Create a Flutter project
-Start Visual Studio Code and create a new Flutter project with a name of your choice.
-We'll use the name **WorkshopApp**
-![Visual Studio create new Flutter app](./images/FlutterApp-Module1Photo1-small.7a69512d2e962c5a6166fb86feb986aa3245a01f.png)
+
+
+![Visual Studio create new Flutter app](./images/code_command_palette.png)
+
+Start Visual Studio Code, we'll use Command Palette to create a new Flutter Application
+
+Create a new Flutter Application with a name of your choice. In this workshop we'll use the name **workshop_app**
+
+![Visual Studio create new Flutter app](./images/code_new_flutter.png)
 
 Once your project is setup, replace the boilerplate code in **main.dart** with the following:
 ``` javascript
@@ -57,7 +63,7 @@ class _MyAppState extends State<MyApp> {
 2. The home widget of our MaterialApp is a Navigator which will allow setup our navigation in a declarative way.
 
 ### Create the Authentication Flow
-Before we can add pages to our Navigator, we need to create the widgets that will represent each of our pages. Let's start with the login page which we will put in a new file **login_page.dart**.
+Before we can add pages to our Navigator, we need to create the widgets that will represent each of our pages. Let's start with the login page which we will put in a new file called **login_page.dart** in the /lib/ directory, this is the same directory as main.dart.
 
 ``` javascript
 import 'package:flutter/material.dart';
@@ -147,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
 
 The UI of LoginPage is not finished, let's add it to the Navigator in **main.dart**.
 ``` javascript
-... // home: Navigator(
+... // home: Navigator( (line 20)
 
 pages: [MaterialPage(child: LoginPage())],
 
@@ -245,7 +251,7 @@ Our SignUpPage is almost identical to the LoginPage with the exception that it h
 
 Let's add the SignUpPage as a MaterialPage in the Navigator of **main.dart** too.
 ``` javascript
-... // home: Navigator(
+... // home: Navigator( (line 20)
 
 pages: [
   MaterialPage(child: LoginPage()),
@@ -254,7 +260,21 @@ pages: [
 
 ... // onPopPage: (route, result) => route.didPop(result),
 ```
-Now run the app.
+
+You'll see that there's no definition in scope for LoginPage() and SingupPage(). We'll need to import those classes into scope for main.dart.
+
+![undef classes](./images/undef_classes.png)
+
+Let's add those imports now to **main.dart**
+``` javascript
+... // import 'package:flutter/material.dart'; (line 1)
+import 'login_page.dart';
+import 'sign_up_page.dart';
+```
+
+
+Now run the app, this will usually take a few minutes to launch.
+
 ![Flutter Sign-in](./images/FlutterApp-Module1Photo3-small.3ee0572183c0373455f087ecf1ef349026b1b23a.png)
 
 The sign up screen should now be showing when the app launches since it is the last page implemented in the pages list of our Navigator. The Navigator treats the pages argument like a stack, where the last in is on top. This means we are currently seeing the SignUpPage stacked on top of LoginPage.
@@ -303,15 +323,25 @@ class AuthService {
 Open **main.dart** again and add create an instance of AuthService in _MyAppState.
 
 ``` javascript
-... // class _MyAppState extends State<MyApp> {
+... // class _MyAppState extends State<MyApp> { (line 15)
 
 final _authService = AuthService();
 
 ... // @override
 ```
-Now we can wrap the Navigator in a StreamBuilder.
+
+AuthService needs to be imported to **main.dart**
 ``` javascript
-... // theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
+... // import 'sign_up_page.dart'; (line 3)
+import 'auth_service.dart';
+
+```
+
+
+Now we can wrap the Navigator in a StreamBuilder.
+
+``` javascript
+... // theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity), (line 22)
 
 // 1
 home: StreamBuilder<AuthState>(
@@ -343,7 +373,7 @@ home: StreamBuilder<AuthState>(
       }
     }),
     
-... // MaterialApp closing ); 
+... // MaterialApp closing ); (line 33)
 ```
 1. We wrapped our Navigator with a StreamBuilder that is expecting to observe a stream emitting AuthState.
 2. We access the AuthState stream by accessing it from the authStateController from the instance of AuthService.
@@ -354,7 +384,7 @@ home: StreamBuilder<AuthState>(
 To ensure stream has data from the start, a value needs to be emitted immediately. We can accomplish this by sending AuthFlowStatus.login when _MyAppState is initialized.
 
 ``` javascript
-... // final _authService = AuthService();
+... // final _authService = AuthService(); (line 17)
 
 @override
 void initState() {
@@ -371,32 +401,32 @@ We still need to implement the ability to switch between LoginPage and SignUpPag
 
 Navigate to **login_page.dart** and add the following:
 ``` javascript
-... // class LoginPage extends StatefulWidget {
+... // class LoginPage extends StatefulWidget { (line 3)
 
 final VoidCallback shouldShowSignUp;
 
 LoginPage({Key key, this.shouldShowSignUp}) : super(key: key);
 
-... // @override
+... // @override (line 4)
 ```
 Our constructor is now accepting a VoidCallback as an arguement which can trigger some functionality in main.dart and called from _LoginPageState.
 
 Pass shouldShowSignUp as the argument for the sign up button in our _LoginPageState:
 
 ``` javascript
-... // child: FlatButton(
+... // child: FlatButton( (line 32)
 
 onPressed: widget.shouldShowSignUp,
 
-... // child: Text('Don\'t have an account? Sign up.')),
+... // child: Text('Don\'t have an account? Sign up.')), (line 34)
 ```
 Back in **main.dart** we need to pass an arguement for the shouldShowSignUp parameter of the LoginPage:
 ``` javascript
-... // if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
+... // if (snapshot.data.authFlowStatus == AuthFlowStatus.login) (line 40)
 
 MaterialPage(
    child: LoginPage(
-       shouldShowSignUp: _authService.showSignUp))
+       shouldShowSignUp: _authService.showSignUp)),
 
 ... // Show Sign Up Page
 ```
@@ -407,7 +437,7 @@ We need to be able to do the same thing for SignUpPage so the user can switch be
 Add the following to **sign_up_page.dart**:
 
 ``` javascript
-... // class SignUpPage extends StatefulWidget {
+... // class SignUpPage extends StatefulWidget { (line 3)
 
 final VoidCallback shouldShowLogin;
 
@@ -416,7 +446,7 @@ SignUpPage({Key key, this.shouldShowLogin}) : super(key: key);
 ... // @override
 ```
 ``` javascript
-... // child: FlatButton(
+... // child: FlatButton( (line 27)
 
 onPressed: widget.shouldShowLogin,
 
@@ -427,7 +457,7 @@ Just as we implemented with LoginPage, SignUpPage will trigger the VoidCallback 
 
 Now to simply update **main.dart** to accept an arguement for shouldShowLogin.
 ``` javascript
-... // if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
+... // if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp) (line 46)
 
 MaterialPage(
    child: SignUpPage(
@@ -470,7 +500,7 @@ We can now add login and sign up methods to AuthService which will accept the re
 
 Add these two functions to **auth_service.dart**:
 ``` javascript
-... // showLogin closing }
+... // showLogin closing } (line 28)
 
 // 1
 void loginWithCredentials(AuthCredentials credentials) {
@@ -483,15 +513,24 @@ void signUpWithCredentials(SignUpCredentials credentials) {
  final state = AuthState(authFlowStatus: AuthFlowStatus.verification);
  authStateController.add(state);
 }
-
-... // AuthService closing }
 ```
+
+And  auth_credetials to **auth_service.dart**
+``` javascript
+... // import 'dart:async'; (line 1)
+import 'auth_credentials.dart';
+... 
+```
+
 1. When a user passes any AuthCredentials we will perform some logic and ultimately put the user in a session state.
 2. Signing up will require that the email entered is verified by entering a verification code. Thus, the sign up logic should chage the state to verification.
 
 Let's start by updating **login_page.dart** to send LoginCredentials via a ValueChanged property.
  ``` javascript
- ... // class LoginPage extends StatefulWidget {
+ ... // import 'package:flutter/material.dart'; (line 1)
+ import 'auth_credentials.dart';
+
+ ... // class LoginPage extends StatefulWidget { 
 
 final ValueChanged<LoginCredentials> didProvideCredentials;
 
@@ -505,7 +544,7 @@ LoginPage({Key key, this.didProvideCredentials, this.shouldShowSignUp})
 We can now pass our credentials from the _login() method in _LoginPageState:
 
 ``` javascript
-... // print('password: $password');
+... // print('password: $password'); (line 80)
 
 final credentials =
   LoginCredentials(username: username, password: password);
@@ -517,6 +556,9 @@ widget.didProvideCredentials(credentials);
 Let's implement something similar for **sign_up_page.dart**:
 
 ``` javascript
+ ... // import 'package:flutter/material.dart'; (line 1)
+ import 'auth_credentials.dart';
+
 ... // class SignUpPage extends StatefulWidget {
 
 final ValueChanged<SignUpCredentials> didProvideCredentials;
@@ -530,7 +572,7 @@ SignUpPage({Key key, this.didProvideCredentials, this.shouldShowLogin})
 ```
 And create the credentials:
 ``` javascript
-... // print('password: $password');
+... // print('password: $password'); (line 81)
 
 final credentials = SignUpCredentials(
    username: username, 
@@ -543,7 +585,7 @@ widget.didProvideCredentials(credentials);
 ```
 Now connect everything in **main.dart**:
 ``` javascript
-... // child: LoginPage(
+... // child: LoginPage( (line 42)
 
 didProvideCredentials: _authService.loginWithCredentials,
 
@@ -551,7 +593,7 @@ didProvideCredentials: _authService.loginWithCredentials,
 ```
 
 ``` javascript
-... // child: SignUpPage(
+... // child: SignUpPage( (line 50)
 
 didProvideCredentials: _authService.signUpWithCredentials,
 
@@ -620,7 +662,7 @@ The VerificationPage is really just a slimmed down version of LoginPage and only
 Back in **auth_service.dart**, there needs to be a method to handle the verification code and update the state to session.
 
 ``` javascript
-... // signUpWithCredentials closing }
+... // signUpWithCredentials closing } (line 41)
 
 void verifyCode(String verificationCode) {
  final state = AuthState(authFlowStatus: AuthFlowStatus.session);
@@ -632,7 +674,12 @@ void verifyCode(String verificationCode) {
 
 Now add the VerificationPage to the Navigator of **main.dart**.
 ``` javascript
-... // shouldShowLogin: _authService.showLogin)),
+... // import 'auth_service.dart'; (line 4)
+import 'verification_page.dart';
+```
+
+``` javascript
+... // shouldShowLogin: _authService.showLogin)), (line 54)
 
 // Show Verification Code Page
 if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
@@ -642,4 +689,105 @@ if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
 ... // pages closing ],
 ```
 
+Add file **map_page.dart** with the below content. (Placeholder)
+``` javascript
+import 'package:flutter/material.dart';
+import 'map_page.dart';
+
+// 1
+class AppFlow extends StatefulWidget {
+  // 1
+  final VoidCallback shouldLogOut;
+
+  AppFlow({Key key, this.shouldLogOut}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _AppFlowState();
+}
+
+class _AppFlowState extends State<AppFlow> {
+  // 3
+  List<MaterialPage> get _pages {
+    return [
+      // Show App Page
+      MaterialPage(child: MapPage(shouldLogOut: widget.shouldLogOut)),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // 4
+    return Navigator(
+      pages: _pages,
+      onPopPage: (route, result) => route.didPop(result),
+    );
+  }
+}
+```
+
+
+Add **app_flow.dart**
+``` javascript
+import 'package:flutter/material.dart';
+
+class AppFlow extends StatefulWidget {
+  // 1
+  final VoidCallback shouldLogOut;
+
+  AppFlow({Key key, this.shouldLogOut}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _AppFlowState();
+}
+
+class _AppFlowState extends State<AppFlow> {
+  // 3
+  List<MaterialPage> get _pages {
+    return [
+      // Show App Page
+      MaterialPage(child: Placeholder()),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // 4
+    return Navigator(
+      pages: _pages,
+      onPopPage: (route, result) => route.didPop(result),
+    );
+  }
+}
+```
+
+
+
+To close the navigation loop of our UI, we need to add a log out method to **auth_service.dart**.
+``` javascript
+... // verifyCode closing } (line 46)
+
+void logOut() {
+ final state = AuthState(authFlowStatus: AuthFlowStatus.login);
+ authStateController.add(state);
+}
+
+... // AuthService closing }
+```
+
+Finally, implement the case for AppFlow in the Navigator.pages of **main.dart**.
+``` javascript
+... // import 'verification_page.dart' (line 5)
+import 'app_flow.dart';
+```
+
+``` javascript
+... // _authService.verifyCode)), (line 62)
+if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
+    MaterialPage(
+        child: AppFlow(shouldLogOut: _authService.logOut))
+... // pages closing ]                ],
+```
+
 ### Test the application
+
+The application shout allow you to navigate between sign up, login and the placeholder Map Page.
