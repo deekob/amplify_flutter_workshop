@@ -21,7 +21,8 @@ This tutorial will not require any previous knowledge with AWS or any of its ser
 ## The labs
 
 * [Prerequisits](./prerequisites/README.md) - Prerequisits for the labs
-* [Lab 1](./lab1/README.md) - Building your first AWS Amplify application
+* [Lab 1](./lab1/README.md) - Building your Flutter application
+* [Lab 2](./lab2/README.md) - Building your Amplify application
 
 ## Cleanup
  
