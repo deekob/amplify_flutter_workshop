@@ -1,4 +1,4 @@
-# Lab 1
+# Module 2
 
 ## Introduction
 Now that you have implemented the Flutter app, you can move onto initializing your Amplify project.
