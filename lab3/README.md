@@ -1,6 +1,23 @@
 # Module 3
 
-## Add dependencies to Flutter
+## Introduction
+The first Amplify category you will be adding to the app will be Authentication. Amplify leverages Amazon Cognito under the hood for managing user pools and identity pools.
+
+In this module you will learn how to sign up, confirm, login, and sign out a user. We will be implementing the functionality for each screen in just a few lines of code.
+
+## What You Will Learn
+* Configure the Auth category
+* Sign up a user
+* Verify a user email
+* Login an authenticated user
+* Sign out an authenticated user
+
+## Key Concepts
+Authentication - Authentication is the process of verifying and managing a user, allowing them to interact with resources of the app.
+
+## Implementation
+
+### Add dependencies to Flutter
 The next step is to install Amplify as a dependency in our project so we can interface with the libraries.
 
 Back in Visual Studio Code, open **pubspec.yaml** and add the following dependency:
@@ -14,8 +31,8 @@ Back in Visual Studio Code, open **pubspec.yaml** and add the following dependen
 
 ... // flutter
 ```
-
-We'll start by importing the dependencies
+### Configuring Flutter to integrate with Amplify
+We'll start by importing the dependencies into **main.dart**
 ``` javascript
 ... // import 'app_flow.dart'; (line 6)
 
@@ -215,3 +232,6 @@ _authService.checkAuthStatus();
 ```
 
 Those are the only modifications needed to compliment our existing authentication flow. Build and run the app and you should be able to sign up, confirm your email, sign out, then sign in again.
+
+
+[<- Lab 2](../lab2/README.md) || [Lab 4 ->](../lab4/README.md) 

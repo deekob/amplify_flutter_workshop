@@ -272,6 +272,21 @@ import 'login_page.dart';
 import 'sign_up_page.dart';
 ```
 
+We also need to make a configuration update for Android, update minSdkVersion to 21 **./android/app/build.gradle**
+``` javascript
+... //        applicationId "com.example.workshop_app" (line 41)
+        minSdkVersion 21
+... //         targetSdkVersion 29
+```
+
+For iOS, open the Podfile **./ios/Podfile** and update the platform to 11.0 or higher:
+``` javascript
+... # Uncomment this line to define a global platform for your project
+
+platform :ios, '11.0'
+
+... # CocoaPods analytics sends network stats synchronously affecting flutter build latency
+```
 
 Now run the app, this will usually take a few minutes to launch.
 
