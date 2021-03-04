@@ -20,7 +20,7 @@ This tutorial will not require any previous knowledge with AWS or any of its ser
 
 ## The labs
 
-* [Prerequisits](./prerequisites/README.md) - Prerequisits for the labs
+* [Prerequisites](./prerequisites/README.md) - Prerequisits for the labs
 * [Lab 1](./lab1/README.md) - Building your Flutter application
 * [Lab 2](./lab2/README.md) - Building your Amplify application
 * [Lab 3](./lab3/README.md) - Configuraing your Flutter application to authenticate against Amazon Cognito
