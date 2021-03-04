@@ -791,3 +791,5 @@ if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
 ### Test the application
 
 The application shout allow you to navigate between sign up, login and the placeholder Map Page.
+
+[<- Prerequisites](../prerequisites/README.md) || [Lab2 ->](../lab2/README.md) 

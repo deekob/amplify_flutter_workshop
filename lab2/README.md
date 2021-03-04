@@ -28,31 +28,14 @@ To create an Amplify project, you must initialize and configure the project at t
 **1.** Navigate to the root of your project:
 
 ``` bash
-cd path/to/your/project
+cd Code/workshop_app
 ```
-Verify that you are in the correct directory by running $ ls -al . Yout output should list folders similar to below :
+Verify that you are in the correct directory by running $ ls . Yout output should list folders similar to below :
 
 ``` bash
-➜  photo_gallery git:(master) ✗ ls -al
-total 80
-drwxr-xr-x  18 kiloloco  staff   576 Oct 19 18:07 .
-drwxr-xr-x   3 kiloloco  staff    96 Oct 18 21:10 ..
-drwxr-xr-x   4 kiloloco  staff   128 Oct 18 22:15 .dart_tool
--rw-r--r--   1 kiloloco  staff   536 Oct 19 19:43 .flutter-plugins
--rw-r--r--   1 kiloloco  staff  1422 Oct 19 19:43 .flutter-plugins-dependencies
--rw-r--r--   1 kiloloco  staff   621 Oct 18 21:10 .gitignore
-drwxr-xr-x   6 kiloloco  staff   192 Oct 18 21:10 .idea
--rw-r--r--   1 kiloloco  staff   305 Oct 18 21:10 .metadata
--rw-r--r--   1 kiloloco  staff  3648 Oct 19 18:07 .packages
--rw-r--r--   1 kiloloco  staff   543 Oct 18 21:10 README.md
-drwxr-xr-x  12 kiloloco  staff   384 Oct 18 21:10 android
-drwxr-xr-x   5 kiloloco  staff   160 Oct 18 22:20 build
-drwxr-xr-x  11 kiloloco  staff   352 Oct 19 19:04 ios
-drwxr-xr-x  11 kiloloco  staff   352 Oct 19 18:08 lib
--rw-r--r--   1 kiloloco  staff   896 Oct 18 21:10 photo_gallery.iml
--rw-r--r--   1 kiloloco  staff  6047 Oct 19 18:07 pubspec.lock
--rw-r--r--   1 kiloloco  staff  2926 Oct 19 18:07 pubspec.yaml
-drwxr-xr-x   3 kiloloco  staff    96 Oct 18 21:10 test
+➜  awsjs@f8ffc2296246 workshop_app % ls
+README.md               build                   lib                     pubspec.yaml            workshop_app.iml
+android                 ios                     pubspec.lock            test
 ```
 
 **2.** Now initialize your project Amplify project:
@@ -63,16 +46,11 @@ You should now be prompted with several questions on how to configure your proje
 ``` bash
 ➜  photo_gallery git:(master) ✗ amplify init
 Note: It is recommended to run this command from the root of your app directory
-? Enter a name for the project photogallery
+? Enter a name for the project workshopapp
 ? Enter a name for the environment dev
 ? Choose your default editor: Visual Studio Code
 ? Choose the type of app that you\'re building flutter
 Please tell us about your project
-⚠️  Flutter project support in the Amplify CLI is in DEVELOPER PREVIEW.
-Only the following categories are supported:
- * Auth
- * Analytics
- * Storage
 ? Where do you want to store your configuration file? ./lib/
 Using default provider  awscloudformation
 
@@ -95,13 +73,40 @@ Your project has been successfully initialized and connected to the cloud!
 ``` bash
 amplify add auth
 ```
+
+``` bash
+ Do you want to use the default authentication and security configuration? Default configuration
+ Warning: you will not be able to edit these selections. 
+ How do you want users to be able to sign in? Username
+ Do you want to configure advanced settings? No, I am done.
+ ```
+
 **4.**
 ``` bash
 amplify add analytics
 ```
+
+``` bash
+awsjs@f8ffc2296246 workshop_app % amplify add analytics
+? Select an Analytics provider Amazon Pinpoint
+? Provide your pinpoint resource name: workshopapp
+Auth configuration is required to allow unauthenticated users, but it is not configured properly.
+Adding analytics would add the Auth category to the project if not already added.
+? Apps need authorization to send analytics events. Do you want to allow guests and unauthenticated users to send analytics events? (we recommend you allow this when getting started) Yes
+```
+
+
 **5.**
 ``` bash
 amplify push
 ```
+``` bash
+| Category  | Resource name       | Operation | Provider plugin   |
+| --------- | ------------------- | --------- | ----------------- |
+| Auth      | workshopapp702c5689 | Create    | awscloudformation |
+| Analytics | workshopapp         | Create    | awscloudformation |
+? Are you sure you want to continue? (Y/n) Y
+```
+
 
 [<- Prerequisites](../prerequisites/README.md) || [Lab2 ->](../lab2/README.md) 
