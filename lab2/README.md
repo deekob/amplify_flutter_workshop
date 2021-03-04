@@ -109,4 +109,4 @@ amplify push
 ```
 
 
-[<- Prerequisites](../prerequisites/README.md) || [Lab2 ->](../lab2/README.md) 
+[<- Prerequisites](../prerequisites/README.md) || [Lab 3 ->](../lab3/README.md) 
