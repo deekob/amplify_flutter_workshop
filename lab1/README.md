@@ -400,3 +400,246 @@ MaterialPage(
 
 ... // Show Sign Up Page
 ```
+Run the app and press the sign up button on LoginPage. It should now navigate to SignUpPage
+
+We need to be able to do the same thing for SignUpPage so the user can switch between sign up and login by tapping the button at the bottom of the screen.
+
+Add the following to **sign_up_page.dart**:
+
+``` javascript
+... // class SignUpPage extends StatefulWidget {
+
+final VoidCallback shouldShowLogin;
+
+SignUpPage({Key key, this.shouldShowLogin}) : super(key: key);
+
+... // @override
+```
+``` javascript
+... // child: FlatButton(
+
+onPressed: widget.shouldShowLogin,
+
+... // child: Text('Already have an account? Login.')),
+```
+
+Just as we implemented with LoginPage, SignUpPage will trigger the VoidCallback when the user presses the botton at the bottom of the screen.
+
+Now to simply update **main.dart** to accept an arguement for shouldShowLogin.
+``` javascript
+... // if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
+
+MaterialPage(
+   child: SignUpPage(
+       shouldShowLogin: _authService.showLogin))
+
+... // pages closing ],
+```
+If you run the app this time, you'll notice you're able to toggle between the LoginPage and SignUpPage.
+
+The last thing needed for each of these pages is a way to pass the user input for each field as credentials that can be processed for login/sign up.
+
+Create a new file called **auth_credentials.dart** and add the following:
+``` javascript
+// 1
+abstract class AuthCredentials {
+  final String username;
+  final String password;
+
+  AuthCredentials({this.username, this.password});
+}
+
+// 2
+class LoginCredentials extends AuthCredentials {
+  LoginCredentials({String username, String password})
+      : super(username: username, password: password);
+}
+
+// 3
+class SignUpCredentials extends AuthCredentials {
+  final String email;
+
+  SignUpCredentials({String username, String password, this.email})
+      : super(username: username, password: password);
+}
+```
+1. AuthCredentials is an abstract class that we will use for a baseline of the minimum info needed to perform either login or sign up. This will allow us to use LoginCredentials and SignUpCredentials almost interchangeably.
+2. LoginCredentials a simple concrete implementation of AuthCredentials as logging in only requires the username and password.
+3. Almost exactly the same as the LoginCredentials but with email being an added field required for signing up.
+We can now add login and sign up methods to AuthService which will accept the respective credentials and change the state of the Navigator to the correct page.
+
+Add these two functions to **auth_service.dart**:
+``` javascript
+... // showLogin closing }
+
+// 1
+void loginWithCredentials(AuthCredentials credentials) {
+ final state = AuthState(authFlowStatus: AuthFlowStatus.session);
+ authStateController.add(state);
+}
+
+// 2
+void signUpWithCredentials(SignUpCredentials credentials) {
+ final state = AuthState(authFlowStatus: AuthFlowStatus.verification);
+ authStateController.add(state);
+}
+
+... // AuthService closing }
+```
+1. When a user passes any AuthCredentials we will perform some logic and ultimately put the user in a session state.
+2. Signing up will require that the email entered is verified by entering a verification code. Thus, the sign up logic should chage the state to verification.
+
+Let's start by updating **login_page.dart** to send LoginCredentials via a ValueChanged property.
+ ``` javascript
+ ... // class LoginPage extends StatefulWidget {
+
+final ValueChanged<LoginCredentials> didProvideCredentials;
+
+... // final VoidCallback shouldShowSignUp;
+
+LoginPage({Key key, this.didProvideCredentials, this.shouldShowSignUp})
+   : super(key: key);
+
+... // @override
+```
+We can now pass our credentials from the _login() method in _LoginPageState:
+
+``` javascript
+... // print('password: $password');
+
+final credentials =
+  LoginCredentials(username: username, password: password);
+widget.didProvideCredentials(credentials);
+
+... // _login closing }
+```
+
+Let's implement something similar for **sign_up_page.dart**:
+
+``` javascript
+... // class SignUpPage extends StatefulWidget {
+
+final ValueChanged<SignUpCredentials> didProvideCredentials;
+
+... // final VoidCallback shouldShowLogin;
+
+SignUpPage({Key key, this.didProvideCredentials, this.shouldShowLogin})
+   : super(key: key);
+
+... // @override
+```
+And create the credentials:
+``` javascript
+... // print('password: $password');
+
+final credentials = SignUpCredentials(
+   username: username, 
+   email: email, 
+   password: password
+);
+widget.didProvideCredentials(credentials);
+
+... // _signUp closing }
+```
+Now connect everything in **main.dart**:
+``` javascript
+... // child: LoginPage(
+
+didProvideCredentials: _authService.loginWithCredentials,
+
+... // shouldShowSignUp: _authService.showSignUp)),
+```
+
+``` javascript
+... // child: SignUpPage(
+
+didProvideCredentials: _authService.signUpWithCredentials,
+
+... // shouldShowLogin: _authService.showLogin))
+```
+
+That wraps up LoginPage and SignUpPage, but as we saw with AuthFlowStatus we still need to implement a page for verification and pages to represent a session.
+
+Let's add VerificationPage in a new file **verification_page.dart**:
+``` javascript
+import 'package:flutter/material.dart';
+
+class VerificationPage extends StatefulWidget {
+  final ValueChanged<String> didProvideVerificationCode;
+
+  VerificationPage({Key key, this.didProvideVerificationCode})
+      : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _VerificationPageState();
+}
+
+class _VerificationPageState extends State<VerificationPage> {
+  final _verificationCodeController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        minimum: EdgeInsets.symmetric(horizontal: 40),
+        child: _verificationForm(),
+      ),
+    );
+  }
+
+  Widget _verificationForm() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Verification Code TextField
+        TextField(
+          controller: _verificationCodeController,
+          decoration: InputDecoration(
+              icon: Icon(Icons.confirmation_number),
+              labelText: 'Verification code'),
+        ),
+
+        // Verify Button
+        FlatButton(
+            onPressed: _verify,
+            child: Text('Verify'),
+            color: Theme.of(context).accentColor)
+      ],
+    );
+  }
+
+  void _verify() {
+    final verificationCode = _verificationCodeController.text.trim();
+    widget.didProvideVerificationCode(verificationCode);
+  }
+}
+```
+
+The VerificationPage is really just a slimmed down version of LoginPage and only passes a verification code up the widget tree.
+
+Back in **auth_service.dart**, there needs to be a method to handle the verification code and update the state to session.
+
+``` javascript
+... // signUpWithCredentials closing }
+
+void verifyCode(String verificationCode) {
+ final state = AuthState(authFlowStatus: AuthFlowStatus.session);
+ authStateController.add(state);
+}
+
+... // AuthService closing }
+```
+
+Now add the VerificationPage to the Navigator of **main.dart**.
+``` javascript
+... // shouldShowLogin: _authService.showLogin)),
+
+// Show Verification Code Page
+if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
+  MaterialPage(child: VerificationPage(
+    didProvideVerificationCode: _authService.verifyCode))
+
+... // pages closing ],
+```
+
+### Test the application
