@@ -10,7 +10,7 @@ In this workshop, you will create a mobile application using AWS Amplify and Flu
 This tutorial will walk you through the steps to create a simple Flutter application discussed above. You will learn to:
 * Manage serverless cloud backend using the AWS Amplify CLI
 * Authenticate users using Amazon Cognito
-* Store data from Flutter to Amazon DynamoDB
+* Store data from a Flutter application into Amazon DynamoDB
 * Record analytics events to Amazon Pinpoint
 
 This tutorial will not require any previous knowledge with AWS or any of its services to follow along. However, there will be some more intermediate concepts covered when working with Flutter and Dart. 

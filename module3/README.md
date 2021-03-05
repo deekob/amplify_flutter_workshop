@@ -1,8 +1,6 @@
 # Module 3
 
 ## Introduction
-The first Amplify category you will be adding to the app will be Authentication. Amplify leverages Amazon Cognito under the hood for managing user pools and identity pools.
-
 In this module you will learn how to sign up, confirm, login, and sign out a user. We will be implementing the functionality for each screen in just a few lines of code.
 
 ## What You Will Learn
@@ -223,7 +221,7 @@ void checkAuthStatus() async {
 
 checkAuthStatus will attempt to get the current AuthSession; if it's successful, the user will be signed in. If the fetch fails, this means the user is not logged in and should be presented with LoginPage.
 
-At the moment, we are calling showLogin inside of the initState method of _MyAppState. Let's change that to checkAuthStatus:
+Finally, we are calling showLogin inside of the initState method of _MyAppState. In **main.dart** let's change that to checkAuthStatus:
 
 ``` javascript
 ... // _configureAmplify(); (line 26)
@@ -232,7 +230,6 @@ _authService.checkAuthStatus();
 ```
 
 Those are the only modifications needed to compliment our existing authentication flow. Build and run the app and you should be able to sign up, confirm your email, sign out, then sign in again.
-
 
 **Congratulations, you're now ready to commence Module 4!**
 

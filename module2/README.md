@@ -28,7 +28,7 @@ To create an Amplify project, you must initialize and configure the project at t
 **1.** Navigate to the root of your project:
 
 ``` bash
-cd Code/workshop_app
+cd workshop_app
 ```
 Verify that you are in the correct directory by running $ ls . Yout output should list folders similar to below :
 
