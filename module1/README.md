@@ -21,7 +21,6 @@ Callbacks - In order to send data from one object to another, we will be using c
 
 ### Create a Flutter project
 
-
 ![Visual Studio create new Flutter app](./images/code_command_palette.png)
 
 Start Visual Studio Code, we'll use Command Palette to create a new Flutter Application
@@ -29,6 +28,7 @@ Start Visual Studio Code, we'll use Command Palette to create a new Flutter Appl
 Create a new Flutter Application with a name of your choice. In this workshop we'll use the name **workshop_app**
 
 ![Visual Studio create new Flutter app](./images/code_new_flutter.png)
+
 
 Once your project is setup, replace the boilerplate code in **main.dart** with the following:
 ``` javascript
@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
 1. We have changed out MyApp widget into a StatefulWidget. We will be manipulating its state later.
 2. The home widget of our MaterialApp is a Navigator which will allow setup our navigation in a declarative way.
 
-### Create the Authentication Flow
+
 Before we can add pages to our Navigator, we need to create the widgets that will represent each of our pages. Let's start with the login page which we will put in a new file called **login_page.dart** in the /lib/ directory, this is the same directory as main.dart.
 
 ``` javascript
@@ -162,11 +162,13 @@ pages: [MaterialPage(child: LoginPage())],
 
 The pages parameter takes a List<Page<dynamic>>, so we pass in a single MaterialPage where our LoginPage is the child.
 
-Give the app a run (F5 in Visual Studio Code) and you should see your LoginPage.
+Now run the app (F5 in Visual Studio Code), this will usually take a few minutes to launch.
 
 ![Flutter Login Screen](./images/FlutterApp-Module1Photo2-small.13afe7ad2deebc36e6b9f65585340abf7b787957.png)
 
-The user will need to be able to sign up befor they can sign in. Let's implement the SignUpPage in a new file **sign_up_page.dart**
+
+
+The user will need to be able to sign up before they can sign in. Let's implement the SignUpPage in a new file **sign_up_page.dart**
 ``` javascript
 import 'package:flutter/material.dart';
 
@@ -342,7 +344,6 @@ AuthService needs to be imported to **main.dart**
 import 'auth_service.dart';
 
 ```
-
 
 Now we can wrap the Navigator in a StreamBuilder.
 
@@ -740,7 +741,7 @@ void logOut() {
 ... // AuthService closing }
 ```
 
-Finally, implement the case for AppFlow in the Navigator.pages of **main.dart**.
+Finally, implement the case for GpsPage in the Navigator.pages of **main.dart**.
 ``` javascript
 ... // import 'verification_page.dart' (line 5)
 import 'gps_page.dart';
