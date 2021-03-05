@@ -30,7 +30,7 @@ To create an Amplify project, you must initialize and configure the project at t
 ``` bash
 cd workshop_app
 ```
-Verify that you are in the correct directory by running $ ls . Yout output should list folders similar to below :
+Verify that you are in the correct directory by running $ ls . Your output should list folders similar to below :
 
 ``` bash
 ➜  awsjs@f8ffc2296246 workshop_app % ls

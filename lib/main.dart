@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:amplify_flutter/amplify.dart';
-import 'amplifyconfiguration.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'login_page.dart';
 import 'sign_up_page.dart';
 import 'auth_service.dart';
-import 'gallery_page.dart';
 import 'verification_page.dart';
+import 'gps_page.dart';
+import 'package:amplify_flutter/amplify.dart';
+import 'amplifyconfiguration.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
             if (snapshot.hasData) {
               return Navigator(
                 pages: [
+                  // 4
                   // Show Login Page
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.login)
                     MaterialPage(
@@ -45,6 +46,7 @@ class _MyAppState extends State<MyApp> {
                             didProvideCredentials:
                                 _authService.loginWithCredentials,
                             shouldShowSignUp: _authService.showSignUp)),
+                  // 5
                   // Show Sign Up Page
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp)
                     MaterialPage(
@@ -52,7 +54,7 @@ class _MyAppState extends State<MyApp> {
                             didProvideCredentials:
                                 _authService.signUpWithCredentials,
                             shouldShowLogin: _authService.showLogin)),
-
+                  // Show Verification Code Page
                   if (snapshot.data.authFlowStatus ==
                       AuthFlowStatus.verification)
                     MaterialPage(
@@ -61,7 +63,7 @@ class _MyAppState extends State<MyApp> {
                                 _authService.verifyCode)),
                   if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
                     MaterialPage(
-                        child: GalleryPage(shouldLogOut: _authService.logOut))
+                        child: GpsPage(shouldLogOut: _authService.logOut))
                 ],
                 onPopPage: (route, result) => route.didPop(result),
               );
