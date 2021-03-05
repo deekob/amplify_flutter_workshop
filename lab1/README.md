@@ -279,15 +279,6 @@ We also need to make a configuration update for Android, update minSdkVersion to
 ... //         targetSdkVersion 29
 ```
 
-For iOS, open the Podfile **./ios/Podfile** and update the platform to 11.0 or higher:
-``` javascript
-... # Uncomment this line to define a global platform for your project
-
-platform :ios, '11.0'
-
-... # CocoaPods analytics sends network stats synchronously affecting flutter build latency
-```
-
 Now run the app, this will usually take a few minutes to launch.
 
 ![Flutter Sign-in](./images/FlutterApp-Module1Photo3-small.3ee0572183c0373455f087ecf1ef349026b1b23a.png)
