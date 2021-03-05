@@ -4,7 +4,7 @@ You will need the following in order to execute this Workshop
 
 1. An AWS Account with sufficient permission to create AWS IAM, Amazon DynamoDB, Amazon Cognito and AWS Amplify resources.
 
-2. An [editor](https://code.visualstudio.com/) that is compatible with Flutter. This Workshop provides prescriptive guidance for Visual Studio Code. For optimal developer experience it is recommended to instal `Dart` and `Flutter` [extensions in Visual Studio Code](https://code.visualstudio.com/docs/editor/extension-gallery).
+2. An [editor](https://code.visualstudio.com/) that is compatible with Flutter. This Workshop provides prescriptive guidance for Visual Studio Code. For optimal developer experience it is recommended to install `Dart` and `Flutter` [extensions in Visual Studio Code](https://code.visualstudio.com/docs/editor/extension-gallery).
 
 3. [Install](https://docs.amplify.aws/cli/start/install) Amplify CLI - This is the tool we will use to create and modify the AWS AMplify resources.
 
