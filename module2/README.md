@@ -156,6 +156,6 @@ Be sure to answer yes to continue.
 ? Are you sure you want to continue? (Y/n) Y
 ```
 
-**Congratulations, with your AWS resources successfully deployed, you're now ready to commence Lab 3!**
+**Congratulations, with your AWS resources successfully deployed, you're now ready to commence Module 3!**
 
-[<- Prerequisites](../prerequisites/README.md) || [Lab 3 ->](../lab3/README.md) 
+[<- Module 1](../module1/README.md) || [Module 3 ->](../module3/README.md) 

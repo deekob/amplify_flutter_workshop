@@ -81,10 +81,10 @@ class _MyAppState extends State<MyApp> {
     Amplify.addPlugins([authPlugin]);
     try {
       await Amplify.configure(amplifyconfig);
-      print(' ---------------------------- Successfully configured Amplify 🎉');
+      print(' Successfully configured Amplify 🎉');
     } catch (e) {
       print(e);
-      print(' ---------------------------- Could not configure Amplify ☠️');
+      print(' Could not configure Amplify ☠️');
     }
   }
 }

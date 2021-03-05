@@ -760,6 +760,6 @@ The application should allow you to navigate between sign up, login and the plac
 
 ![GPS_screen](./images/GPS_screen.png)
 
-**Congratulations, you're now ready to commence Lab 2!**
+**Congratulations, you're now ready to commence Module 2!**
 
-[<- Prerequisites](../prerequisites/README.md) || [Lab2 ->](../lab2/README.md) 
+[<- Prerequisites](../prerequisites/README.md) || [Module2 ->](../module2/README.md) 
