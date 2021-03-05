@@ -38,7 +38,7 @@ README.md               build                   lib                     pubspec.
 android                 ios                     pubspec.lock            test
 ```
 
-**2.** Now initialize your project Amplify project:
+**2.** Now initialize your project Amplify project by executing:
 ``` bash
 amplify init
 ```
@@ -69,11 +69,12 @@ Initialized your environment successfully.
 Your project has been successfully initialized and connected to the cloud!
 ```
 
-**3.** 
+**3.** Next, we'll add auth to our amplify app, it's as simple as the below command with a couple of configuration items. Simply run :
 ``` bash
 amplify add auth
 ```
 
+Answer the questions as per below.
 ``` bash
  Do you want to use the default authentication and security configuration? Default configuration
  Warning: you will not be able to edit these selections. 
@@ -81,11 +82,12 @@ amplify add auth
  Do you want to configure advanced settings? No, I am done.
  ```
 
-**4.**
+**4.** To support events being sent from our application, we'll create an Amazon Pinpoint resource. Execute the following command :
 ``` bash
 amplify add analytics
 ```
 
+Answer the questions as per below.
 ``` bash
 awsjs@f8ffc2296246 workshop_app % amplify add analytics
 ? Select an Analytics provider Amazon Pinpoint
@@ -96,17 +98,64 @@ Adding analytics would add the Auth category to the project if not already added
 ```
 
 
-**5.**
+
+**5.** To support storing GPS co-ordinates from our Flutter application, we'll need some persistent storage. Amazon DynamoDB is a good fit for our use-case. To start provisioning storage resources in the backend run :
+``` bash
+amplify add storage
+```
+
+Use the following configuration :
+``` bash
+? Please select from one of the below mentioned services: NoSQL Database
+
+Welcome to the NoSQL DynamoDB database wizard
+This wizard asks you a series of questions to help determine how to set up your NoSQL database table.
+
+? Please provide a friendly name for your resource that will be used to label this category in the project: dynamo37da83e0
+? Please provide table name: gps_coords
+
+You can now add columns to the table.
+
+? What would you like to name this column: id
+? Please choose the data type: string
+? Would you like to add another column? Yes
+? What would you like to name this column: coords
+? Please choose the data type: string
+? Would you like to add another column? No
+
+Before you create the database, you must specify how items in your table are uniquely organized. You do this by specifying a primary key. The primary key uniquely identifies each item in the table so that no two items can have the same key. This can be an individual column, or a combination that includes a primary key and a sort key.
+
+To learn more about primary keys, see:
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey
+
+? Please choose partition key for the table: id
+? Do you want to add a sort key to your table? No
+
+You can optionally add global secondary indexes for this table. These are useful when you run queries defined in a different column than the primary key.
+To learn more about indexes, see:
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.SecondaryIndexes
+
+? Do you want to add global secondary indexes to your table? No
+? Do you want to add a Lambda Trigger for your Table? No
+
+```
+
+
+**6.** We're created an Amplify application configuration in our local environment, to get the Amplify CLI to create the requested AWS resources, we use the command :
 ``` bash
 amplify push
 ```
+
+Be sure to answer yes to continue.
 ``` bash
 | Category  | Resource name       | Operation | Provider plugin   |
 | --------- | ------------------- | --------- | ----------------- |
 | Auth      | workshopapp702c5689 | Create    | awscloudformation |
 | Analytics | workshopapp         | Create    | awscloudformation |
+| Storage   | dynamo37da83e0      | Create    | awscloudformation |
 ? Are you sure you want to continue? (Y/n) Y
 ```
 
+**Congratulations, with your AWS resources successfully deployed, you're now ready to commence Lab 3!**
 
 [<- Prerequisites](../prerequisites/README.md) || [Lab 3 ->](../lab3/README.md) 

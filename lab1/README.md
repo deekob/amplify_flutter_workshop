@@ -279,15 +279,6 @@ We also need to make a configuration update for Android, update minSdkVersion to
 ... //         targetSdkVersion 29
 ```
 
-For iOS, open the Podfile **./ios/Podfile** and update the platform to 11.0 or higher:
-``` javascript
-... # Uncomment this line to define a global platform for your project
-
-platform :ios, '11.0'
-
-... # CocoaPods analytics sends network stats synchronously affecting flutter build latency
-```
-
 Now run the app, this will usually take a few minutes to launch.
 
 ![Flutter Sign-in](./images/FlutterApp-Module1Photo3-small.3ee0572183c0373455f087ecf1ef349026b1b23a.png)
@@ -704,77 +695,37 @@ if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
 ... // pages closing ],
 ```
 
-Add file **map_page.dart** with the below content. (Placeholder)
+For the moment, we're going to add a placeholder page that we will come back and add functionality to. Add **gps_page.dart** with the following content :
 ``` javascript
 import 'package:flutter/material.dart';
-import 'map_page.dart';
 
 // 1
-class AppFlow extends StatefulWidget {
-  // 1
+class GpsPage extends StatelessWidget {
+  // 2
   final VoidCallback shouldLogOut;
 
-  AppFlow({Key key, this.shouldLogOut}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _AppFlowState();
-}
-
-class _AppFlowState extends State<AppFlow> {
-  // 3
-  List<MaterialPage> get _pages {
-    return [
-      // Show App Page
-      MaterialPage(child: MapPage(shouldLogOut: widget.shouldLogOut)),
-    ];
-  }
+  GpsPage({Key key, this.shouldLogOut}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // 4
-    return Navigator(
-      pages: _pages,
-      onPopPage: (route, result) => route.didPop(result),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('GPS Co-ordinates'),
+        actions: [
+          // Log Out Button
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child:
+                GestureDetector(child: Icon(Icons.logout), onTap: shouldLogOut),
+          )
+        ],
+      ),
+      // 5
+      body: Container(),
     );
   }
 }
 ```
-
-
-Add **app_flow.dart**
-``` javascript
-import 'package:flutter/material.dart';
-
-class AppFlow extends StatefulWidget {
-  // 1
-  final VoidCallback shouldLogOut;
-
-  AppFlow({Key key, this.shouldLogOut}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _AppFlowState();
-}
-
-class _AppFlowState extends State<AppFlow> {
-  // 3
-  List<MaterialPage> get _pages {
-    return [
-      // Show App Page
-      MaterialPage(child: Placeholder()),
-    ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // 4
-    return Navigator(
-      pages: _pages,
-      onPopPage: (route, result) => route.didPop(result),
-    );
-  }
-}
-```
-
 
 
 To close the navigation loop of our UI, we need to add a log out method to **auth_service.dart**.
@@ -792,19 +743,23 @@ void logOut() {
 Finally, implement the case for AppFlow in the Navigator.pages of **main.dart**.
 ``` javascript
 ... // import 'verification_page.dart' (line 5)
-import 'app_flow.dart';
+import 'gps_page.dart';
 ```
 
 ``` javascript
 ... // _authService.verifyCode)), (line 62)
 if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
     MaterialPage(
-        child: AppFlow(shouldLogOut: _authService.logOut))
+        child: GpsPage(shouldLogOut: _authService.logOut))
 ... // pages closing ]                ],
 ```
 
 ### Test the application
 
-The application shout allow you to navigate between sign up, login and the placeholder Map Page.
+The application should allow you to navigate between sign up, login and the placeholder GPS Page (which allows you to log out).
+
+![GPS_screen](./images/GPS_screen.png)
+
+**Congratulations, you're now ready to commence Lab 2!**
 
 [<- Prerequisites](../prerequisites/README.md) || [Lab2 ->](../lab2/README.md) 
