@@ -695,59 +695,22 @@ if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
 ... // pages closing ],
 ```
 
-Add file **app_flow.dart** with the below content. (Placeholder)
-``` javascript
-import 'package:flutter/material.dart';
-import 'map_page.dart';
-
-// 1
-class AppFlow extends StatefulWidget {
-  // 1
-  final VoidCallback shouldLogOut;
-
-  AppFlow({Key key, this.shouldLogOut}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _AppFlowState();
-}
-
-class _AppFlowState extends State<AppFlow> {
-  // 3
-  List<MaterialPage> get _pages {
-    return [
-      // Show App Page
-      MaterialPage(child: MapPage(shouldLogOut: widget.shouldLogOut)),
-    ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // 4
-    return Navigator(
-      pages: _pages,
-      onPopPage: (route, result) => route.didPop(result),
-    );
-  }
-}
-```
-
-
-Add **map_page.dart**
+For the moment, we're going to add a placeholder page that we will come back and add functionality to. Add **gps_page.dart** with the following content :
 ``` javascript
 import 'package:flutter/material.dart';
 
 // 1
-class MapPage extends StatelessWidget {
+class GpsPage extends StatelessWidget {
   // 2
   final VoidCallback shouldLogOut;
 
-  MapPage({Key key, this.shouldLogOut}) : super(key: key);
+  GpsPage({Key key, this.shouldLogOut}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Map'),
+        title: Text('GPS Co-ordinates'),
         actions: [
           // Log Out Button
           Padding(
@@ -762,9 +725,7 @@ class MapPage extends StatelessWidget {
     );
   }
 }
-
 ```
-
 
 
 To close the navigation loop of our UI, we need to add a log out method to **auth_service.dart**.
@@ -782,19 +743,23 @@ void logOut() {
 Finally, implement the case for AppFlow in the Navigator.pages of **main.dart**.
 ``` javascript
 ... // import 'verification_page.dart' (line 5)
-import 'app_flow.dart';
+import 'gps_page.dart';
 ```
 
 ``` javascript
 ... // _authService.verifyCode)), (line 62)
 if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
     MaterialPage(
-        child: AppFlow(shouldLogOut: _authService.logOut))
+        child: GpsPage(shouldLogOut: _authService.logOut))
 ... // pages closing ]                ],
 ```
 
 ### Test the application
 
-The application shout allow you to navigate between sign up, login and the placeholder Map Page.
+The application should allow you to navigate between sign up, login and the placeholder GPS Page (which allows you to log out).
+
+![GPS_screen](./images/GPS_screen.png)
+
+**Congratulations, you're now ready to commence Lab 2!**
 
 [<- Prerequisites](../prerequisites/README.md) || [Lab2 ->](../lab2/README.md) 

@@ -234,4 +234,6 @@ _authService.checkAuthStatus();
 Those are the only modifications needed to compliment our existing authentication flow. Build and run the app and you should be able to sign up, confirm your email, sign out, then sign in again.
 
 
+**Congratulations, you're now ready to commence Lab 4!**
+
 [<- Lab 2](../lab2/README.md) || [Lab 4 ->](../lab4/README.md) 
