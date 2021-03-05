@@ -27,4 +27,4 @@ Your output should look similar to the below :
 **Congratulations, you're now ready to commence the Workshop!**
 
 
-[<- Back](../README.md) || [Lab 1 ->](../lab1/README.md) 
+[<- Back](../README.md) || [Module 1 ->](../module1/README.md) 
