@@ -24,7 +24,7 @@ flutter doctor
 Your output should look similar to the below :
 ![Flutter Doctor](./images/flutter_doctor.png)
 
-Congratulations, you're now ready to commence the Workshop!
+**Congratulations, you're now ready to commence the Workshop!**
 
 
 [<- Back](../README.md) || [Lab 1 ->](../lab1/README.md) 
