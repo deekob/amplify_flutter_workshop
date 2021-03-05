@@ -695,7 +695,7 @@ if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
 ... // pages closing ],
 ```
 
-Add file **map_page.dart** with the below content. (Placeholder)
+Add file **app_flow.dart** with the below content. (Placeholder)
 ``` javascript
 import 'package:flutter/material.dart';
 import 'map_page.dart';
@@ -732,38 +732,37 @@ class _AppFlowState extends State<AppFlow> {
 ```
 
 
-Add **app_flow.dart**
+Add **map_page.dart**
 ``` javascript
 import 'package:flutter/material.dart';
 
-class AppFlow extends StatefulWidget {
-  // 1
+// 1
+class MapPage extends StatelessWidget {
+  // 2
   final VoidCallback shouldLogOut;
 
-  AppFlow({Key key, this.shouldLogOut}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _AppFlowState();
-}
-
-class _AppFlowState extends State<AppFlow> {
-  // 3
-  List<MaterialPage> get _pages {
-    return [
-      // Show App Page
-      MaterialPage(child: Placeholder()),
-    ];
-  }
+  MapPage({Key key, this.shouldLogOut}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // 4
-    return Navigator(
-      pages: _pages,
-      onPopPage: (route, result) => route.didPop(result),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Map'),
+        actions: [
+          // Log Out Button
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child:
+                GestureDetector(child: Icon(Icons.logout), onTap: shouldLogOut),
+          )
+        ],
+      ),
+      // 5
+      body: Container(),
     );
   }
 }
+
 ```
 
 
