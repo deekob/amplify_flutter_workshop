@@ -24,6 +24,7 @@ Please work your way through each module, starting with prerequisites :
 * [Module 2](./module2/README.md) - Building your Amplify application
 * [Module 3](./module3/README.md) - Configuraing your Flutter application to authenticate against Amazon Cognito
 
+
 ## Cleanup
  
 It is recommended to co clean up all the resources created in this workshop once finished to reduce costs.
