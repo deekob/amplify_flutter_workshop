@@ -19,11 +19,11 @@ This tutorial will not require any previous knowledge with AWS or any of its ser
 ## The modules
 
 Please work your way through each module, starting with prerequisites :
-* [Prerequisits](./prerequisites/README.md) - Prerequisits for the labs
+* [Prerequisites](./prerequisites/README.md) - Prerequisites for the labs
 * [Module 1](./module1/README.md) - Building your Flutter application
 * [Module 2](./module2/README.md) - Building your Amplify application
-* [Module 3](./module3/README.md) - Configuraing your Flutter application to authenticate against Amazon Cognito
-
+* [Module 3](./module3/README.md) - Configuring your Flutter application to authenticate against Amazon Cognito
+* [Module 4](./module3/README.md) - Adding in a map and saving the location to DynamoDB
 
 ## Cleanup
  

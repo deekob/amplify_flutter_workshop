@@ -31,7 +31,7 @@ Create a new Flutter Application with a name of your choice. In this workshop we
 
 
 Once your project is setup, replace the boilerplate code in **main.dart** with the following:
-``` javascript
+``` dart
 import 'package:flutter/material.dart';
 
 void main() {
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
 
 Before we can add pages to our Navigator, we need to create the widgets that will represent each of our pages. Let's start with the login page which we will put in a new file called **login_page.dart** in the /lib/ directory, this is the same directory as main.dart.
 
-``` javascript
+``` dart
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
 7. The _login method will be responsible for extracting the values from the textfield controllers and creating an AuthCredentials object. Right now it is simply printing the values of each controller.
 
 The UI of LoginPage is not finished, let's add it to the Navigator in **main.dart**.
-``` javascript
+``` dart
 ... // home: Navigator( (line 20)
 
 pages: [MaterialPage(child: LoginPage())],
@@ -169,7 +169,7 @@ Now run the app (F5 in Visual Studio Code), this will usually take a few minutes
 
 
 The user will need to be able to sign up before they can sign in. Let's implement the SignUpPage in a new file **sign_up_page.dart**
-``` javascript
+``` dart
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -252,7 +252,7 @@ class _SignUpPageState extends State<SignUpPage> {
 Our SignUpPage is almost identical to the LoginPage with the exception that it has an additional field for email and the text for the buttons have been changed.
 
 Let's add the SignUpPage as a MaterialPage in the Navigator of **main.dart** too.
-``` javascript
+``` dart
 ... // home: Navigator( (line 20)
 
 pages: [
@@ -268,14 +268,14 @@ You'll see that there's no definition in scope for LoginPage() and SingupPage().
 ![undef classes](./images/undef_classes.png)
 
 Let's add those imports now to **main.dart**
-``` javascript
+``` dart
 ... // import 'package:flutter/material.dart'; (line 1)
 import 'login_page.dart';
 import 'sign_up_page.dart';
 ```
 
 We also need to make a configuration update for Android, update minSdkVersion to 21 **./android/app/build.gradle**
-``` javascript
+``` dart
 ... //        applicationId "com.example.workshop_app" (line 41)
         minSdkVersion 21
 ... //         targetSdkVersion 29
@@ -290,7 +290,7 @@ The sign up screen should now be showing when the app launches since it is the l
 If we want to display different pages, we will have to implement logic inside of our list to determine when to display specific pages. We can accomplish these updates by creating a Stream and nesting our Navigator in a StreamBuilder.
 
 Create a new file called **auth_service.dart** and add the following:
-``` javascript
+``` dart
 import 'dart:async';
 
 // 1
@@ -330,7 +330,7 @@ class AuthService {
 
 Open **main.dart** again and add create an instance of AuthService in _MyAppState.
 
-``` javascript
+``` dart
 ... // class _MyAppState extends State<MyApp> { (line 15)
 
 final _authService = AuthService();
@@ -339,7 +339,7 @@ final _authService = AuthService();
 ```
 
 AuthService needs to be imported to **main.dart**
-``` javascript
+``` dart
 ... // import 'sign_up_page.dart'; (line 3)
 import 'auth_service.dart';
 
@@ -347,7 +347,7 @@ import 'auth_service.dart';
 
 Now we can wrap the Navigator in a StreamBuilder.
 
-``` javascript
+``` dart
 ... // theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity), (line 22)
 
 // 1
@@ -390,7 +390,7 @@ home: StreamBuilder<AuthState>(
 6. If the stream doesn't have data, a CircularProgressIndicator is displayed.
 To ensure stream has data from the start, a value needs to be emitted immediately. We can accomplish this by sending AuthFlowStatus.login when _MyAppState is initialized.
 
-``` javascript
+``` dart
 ... // final _authService = AuthService(); (line 17)
 
 @override
@@ -407,7 +407,7 @@ If we run the app now, it should be displaying LoginPage as that's the only valu
 We still need to implement the ability to switch between LoginPage and SignUpPage.
 
 Navigate to **login_page.dart** and add the following:
-``` javascript
+``` dart
 ... // class LoginPage extends StatefulWidget { (line 3)
 
 final VoidCallback shouldShowSignUp;
@@ -420,7 +420,7 @@ Our constructor is now accepting a VoidCallback as an arguement which can trigge
 
 Pass shouldShowSignUp as the argument for the sign up button in our _LoginPageState:
 
-``` javascript
+``` dart
 ... // child: FlatButton( (line 32)
 
 onPressed: widget.shouldShowSignUp,
@@ -428,7 +428,7 @@ onPressed: widget.shouldShowSignUp,
 ... // child: Text('Don\'t have an account? Sign up.')), (line 34)
 ```
 Back in **main.dart** we need to pass an arguement for the shouldShowSignUp parameter of the LoginPage:
-``` javascript
+``` dart
 ... // if (snapshot.data.authFlowStatus == AuthFlowStatus.login) (line 40)
 
 MaterialPage(
@@ -443,7 +443,7 @@ We need to be able to do the same thing for SignUpPage so the user can switch be
 
 Add the following to **sign_up_page.dart**:
 
-``` javascript
+``` dart
 ... // class SignUpPage extends StatefulWidget { (line 3)
 
 final VoidCallback shouldShowLogin;
@@ -452,7 +452,7 @@ SignUpPage({Key key, this.shouldShowLogin}) : super(key: key);
 
 ... // @override
 ```
-``` javascript
+``` dart
 ... // child: FlatButton( (line 27)
 
 onPressed: widget.shouldShowLogin,
@@ -463,7 +463,7 @@ onPressed: widget.shouldShowLogin,
 Just as we implemented with LoginPage, SignUpPage will trigger the VoidCallback when the user presses the botton at the bottom of the screen.
 
 Now to simply update **main.dart** to accept an arguement for shouldShowLogin.
-``` javascript
+``` dart
 ... // if (snapshot.data.authFlowStatus == AuthFlowStatus.signUp) (line 46)
 
 MaterialPage(
@@ -477,7 +477,7 @@ If you run the app this time, you'll notice you're able to toggle between the Lo
 The last thing needed for each of these pages is a way to pass the user input for each field as credentials that can be processed for login/sign up.
 
 Create a new file called **auth_credentials.dart** and add the following:
-``` javascript
+``` dart
 // 1
 abstract class AuthCredentials {
   final String username;
@@ -506,7 +506,7 @@ class SignUpCredentials extends AuthCredentials {
 We can now add login and sign up methods to AuthService which will accept the respective credentials and change the state of the Navigator to the correct page.
 
 Add these two functions to **auth_service.dart**:
-``` javascript
+``` dart
 ... // showLogin closing } (line 28)
 
 // 1
@@ -523,7 +523,7 @@ void signUpWithCredentials(SignUpCredentials credentials) {
 ```
 
 And  auth_credetials to **auth_service.dart**
-``` javascript
+``` dart
 ... // import 'dart:async'; (line 1)
 import 'auth_credentials.dart';
 ... 
@@ -533,7 +533,7 @@ import 'auth_credentials.dart';
 2. Signing up will require that the email entered is verified by entering a verification code. Thus, the sign up logic should chage the state to verification.
 
 Let's start by updating **login_page.dart** to send LoginCredentials via a ValueChanged property.
- ``` javascript
+ ``` dart
  ... // import 'package:flutter/material.dart'; (line 1)
  import 'auth_credentials.dart';
 
@@ -550,7 +550,7 @@ LoginPage({Key key, this.didProvideCredentials, this.shouldShowSignUp})
 ```
 We can now pass our credentials from the _login() method in _LoginPageState:
 
-``` javascript
+``` dart
 ... // print('password: $password'); (line 80)
 
 final credentials =
@@ -562,7 +562,7 @@ widget.didProvideCredentials(credentials);
 
 Let's implement something similar for **sign_up_page.dart**:
 
-``` javascript
+``` dart
  ... // import 'package:flutter/material.dart'; (line 1)
  import 'auth_credentials.dart';
 
@@ -578,7 +578,7 @@ SignUpPage({Key key, this.didProvideCredentials, this.shouldShowLogin})
 ... // @override
 ```
 And create the credentials:
-``` javascript
+``` dart
 ... // print('password: $password'); (line 81)
 
 final credentials = SignUpCredentials(
@@ -591,7 +591,7 @@ widget.didProvideCredentials(credentials);
 ... // _signUp closing }
 ```
 Now connect everything in **main.dart**:
-``` javascript
+``` dart
 ... // child: LoginPage( (line 42)
 
 didProvideCredentials: _authService.loginWithCredentials,
@@ -599,7 +599,7 @@ didProvideCredentials: _authService.loginWithCredentials,
 ... // shouldShowSignUp: _authService.showSignUp)),
 ```
 
-``` javascript
+``` dart
 ... // child: SignUpPage( (line 50)
 
 didProvideCredentials: _authService.signUpWithCredentials,
@@ -610,7 +610,7 @@ didProvideCredentials: _authService.signUpWithCredentials,
 That wraps up LoginPage and SignUpPage, but as we saw with AuthFlowStatus we still need to implement a page for verification and pages to represent a session.
 
 Let's add VerificationPage in a new file **verification_page.dart**:
-``` javascript
+``` dart
 import 'package:flutter/material.dart';
 
 class VerificationPage extends StatefulWidget {
@@ -668,7 +668,7 @@ The VerificationPage is really just a slimmed down version of LoginPage and only
 
 Back in **auth_service.dart**, there needs to be a method to handle the verification code and update the state to session.
 
-``` javascript
+``` dart
 ... // signUpWithCredentials closing } (line 41)
 
 void verifyCode(String verificationCode) {
@@ -680,12 +680,12 @@ void verifyCode(String verificationCode) {
 ```
 
 Now add the VerificationPage to the Navigator of **main.dart**.
-``` javascript
+``` dart
 ... // import 'auth_service.dart'; (line 4)
 import 'verification_page.dart';
 ```
 
-``` javascript
+``` dart
 ... // shouldShowLogin: _authService.showLogin)), (line 54)
 
 // Show Verification Code Page
@@ -697,7 +697,7 @@ if (snapshot.data.authFlowStatus == AuthFlowStatus.verification)
 ```
 
 For the moment, we're going to add a placeholder page that we will come back and add functionality to. Add **gps_page.dart** with the following content :
-``` javascript
+``` dart
 import 'package:flutter/material.dart';
 
 // 1
@@ -730,7 +730,7 @@ class GpsPage extends StatelessWidget {
 
 
 To close the navigation loop of our UI, we need to add a log out method to **auth_service.dart**.
-``` javascript
+``` dart
 ... // verifyCode closing } (line 46)
 
 void logOut() {
@@ -742,12 +742,12 @@ void logOut() {
 ```
 
 Finally, implement the case for GpsPage in the Navigator.pages of **main.dart**.
-``` javascript
+``` dart
 ... // import 'verification_page.dart' (line 5)
 import 'gps_page.dart';
 ```
 
-``` javascript
+``` dart
 ... // _authService.verifyCode)), (line 62)
 if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
     MaterialPage(
