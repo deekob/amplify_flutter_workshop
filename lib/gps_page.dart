@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
 
 class GpsPage extends StatelessWidget {
   final VoidCallback shouldLogOut;
@@ -34,8 +35,8 @@ class GpsSubpage extends StatefulWidget {
 
 class _GpsSubpageState extends State<GpsSubpage> {
   // Location
-  // var location = new Location();
-  // Map<String, double> userLocation;
+  double currentPositionLon;
+  double currentPositionLat;
 
   // Maps
   GoogleMapController myController;
@@ -47,15 +48,13 @@ class _GpsSubpageState extends State<GpsSubpage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        // userLocation == null
-        //     ? CircularProgressIndicator()
-        //     : Text("Location:" +
-        //         userLocation["latitude"].toString() +
-        //         " " +
-        //         userLocation["longitude"].toString()),
         GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
@@ -63,36 +62,46 @@ class _GpsSubpageState extends State<GpsSubpage> {
             zoom: 10.0,
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.all(14.0),
-        //   child: Align(
-        //     alignment: Alignment.topRight,
-        //     child: FloatingActionButton(
-        //       onPressed: () {
-        //         _getLocation().then((value) {
-        //           setState(() {
-        //             userLocation = value;
-        //           });
-        //         });
-        //       },
-        //       materialTapTargetSize: MaterialTapTargetSize.padded,
-        //       backgroundColor: Colors.lightBlue,
-        //       child: const Icon(Icons.map, size: 30.0),
-        //     ),
-        //   ),
-        // ),
+        Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Align(
+            alignment: Alignment.topRight,
+            child: FloatingActionButton(
+              // Location
+              onPressed: () async {
+                var _positionLon;
+                var _positionLat;
+                await Geolocator.getCurrentPosition().then((value) => {
+                      _positionLon = value.longitude,
+                      _positionLat = value.latitude,
+                    });
+
+                setState(
+                  () {
+                    currentPositionLon = _positionLon;
+                    currentPositionLat = _positionLat;
+                  },
+                );
+              },
+              materialTapTargetSize: MaterialTapTargetSize.padded,
+              backgroundColor: Colors.lightBlue,
+              child: const Icon(Icons.map, size: 30.0),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              'Lon: $currentPositionLon    Lat: $currentPositionLat',
+              style: TextStyle(
+                background: Paint()..color = Colors.white,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
-
-  // Future<Map<String, double>> _getLocation() async {
-  //   var currentLocation = <String, double>{};
-  //   try {
-  //     currentLocation = (await location.getLocation()) as Map<String, double>;
-  //   } catch (e) {
-  //     currentLocation = null;
-  //   }
-  //   print(currentLocation);
-  //   return currentLocation;
-  // }
 }
