@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:amplify_flutter/amplify.dart';
+// import 'package:flutter_application_1/models/ModelProvider.dart';
 
 class GpsPage extends StatelessWidget {
   final VoidCallback shouldLogOut;
@@ -33,11 +35,11 @@ class GpsSubpage extends StatefulWidget {
 }
 
 class _GpsSubpageState extends State<GpsSubpage> {
-  // Location
+  // Set a default GPS location before we quiz for the devices realtime GPS location
   double currentPositionLat = -37.840935;
   double currentPositionLon = 144.946457;
 
-  // Maps
+  // Add and initialize the Google Maps controller
   GoogleMapController myController;
 
   void _onMapCreated(GoogleMapController controller) {
@@ -50,7 +52,17 @@ class _GpsSubpageState extends State<GpsSubpage> {
         LatLng(currentPositionLat, currentPositionLon),
       ),
     );
+    // _addGPSLocationToDB();
   }
+
+  // void _addGPSLocationToDB() async {
+  //   GPSCoordinates newGPSCoordinate = GPSCoordinates(
+  //       id: "1",
+  //       locationName: 'Current Location',
+  //       Latitude: 15.3444,
+  //       Longitude: 15.3444);
+  //   await Amplify.DataStore.save(newGPSCoordinate);
+  // }
 
   @override
   void initState() {
@@ -60,6 +72,7 @@ class _GpsSubpageState extends State<GpsSubpage> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
+        // Add a view of Google Maps with initial position of Melbourne and drop a marker
         GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
@@ -72,6 +85,7 @@ class _GpsSubpageState extends State<GpsSubpage> {
             )
           },
         ),
+        // Create a button that gets the GPS locations on press and stores them into state management
         Padding(
           padding: const EdgeInsets.all(14.0),
           child: Align(
@@ -91,6 +105,7 @@ class _GpsSubpageState extends State<GpsSubpage> {
                     currentPositionLat = _positionLat;
                   },
                 );
+                // Call _setNewLocation() within the GPS Location button code so that when you tap it, it will update the Google Maps view and pin
                 _setNewLocation();
               },
               materialTapTargetSize: MaterialTapTargetSize.padded,
@@ -99,6 +114,7 @@ class _GpsSubpageState extends State<GpsSubpage> {
             ),
           ),
         ),
+        // Shows the current GPS coordinates down in the bottom left hand side of the screen
         Padding(
           padding: const EdgeInsets.all(14.0),
           child: Align(

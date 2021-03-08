@@ -5,8 +5,11 @@ import 'auth_service.dart';
 import 'verification_page.dart';
 import 'gps_page.dart';
 import 'package:amplify_flutter/amplify.dart';
+// import 'package:amplify_datastore/amplify_datastore.dart';
+// import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
 import 'amplifyconfiguration.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+// import 'models/ModelProvider.dart';
 
 void main() {
   runApp(MyApp());
@@ -79,6 +82,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _configureAmplify() async {
+    // Add this in your app initialization
+    // Amplify.addPlugin(AmplifyDataStore(modelProvider: ModelProvider.instance));
     AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
     Amplify.addPlugins([authPlugin]);
     try {
