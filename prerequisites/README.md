@@ -14,10 +14,12 @@ or follow [these instructions](https://docs.amplify.aws/cli/start/install#option
 
 5. Install [Flutter](https://flutter.dev/docs/get-started/install) version 1.20.0 or higher. Only install Flutter and add it to your path ( [Windows](https://flutter.dev/docs/get-started/install/windows#update-your-path) || [macOS](https://flutter.dev/docs/get-started/install/macos#update-your-path)) at this point, further configuration occurs in the following step.
 
-6. A device [emulator](https://developer.android.com/studio) to run the Flutter application on. Download and install Android Studio and create a device emulator using the instructions for your platform - [macOS](https://flutter.dev/docs/get-started/install/macos#set-up-the-android-emulator) || [Windows](https://flutter.dev/docs/get-started/install/windows#set-up-the-android-emulator)
+6. Some basic experience with Android / iOS app development (i.e. familiarity with Android Studio interface such as launching Android Emulator).
+
+7. A device [emulator](https://developer.android.com/studio) to run the Flutter application on. Download and install Android Studio and create a device emulator using the instructions for your platform - [macOS](https://flutter.dev/docs/get-started/install/macos#set-up-the-android-emulator) || [Windows](https://flutter.dev/docs/get-started/install/windows#set-up-the-android-emulator)
 This Workshop provides prescriptive guidance on working emulating Android as Android Studio supports Windows and macOS development environments.
 
-7. Finally, check configuration using :
+8. Finally, check configuration using :
 ``` bash
 flutter doctor
 ```

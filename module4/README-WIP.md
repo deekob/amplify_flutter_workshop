@@ -1,14 +1,19 @@
 # Module 4
 
 ## Introduction
-In this module you will learn how to retrieve gps coordinates of a mobile devices location, and show this on google maps.
+In this module you will learn how to retrieve gps coordinates of a mobile devices location, show this on google maps and push them to an database in AWS. 
 
 ## What You Will Learn
 * Ask for GPS location permissions of end user
 * Recieve GPS location of mobile device on Android / iOS
+* Using GraphQL to save the GPS location of mobile device into a DynamoDB database on AWS.
 
 ## Key Concepts
 GPS Coordinates - GPS coordinates are a unique identifier of a precise geographic location on the earth, usually expressed in alphanumeric characters. Coordinates, in this context, are points of intersection in a grid system. GPS (global positioning system) coordinates are usually expressed as the combination of latitude and longitude.
+
+GraphQL - GraphQL is an open-source data query and manipulation language for APIs, and a runtime for fulfilling queries with existing data. It lets the client specify exactly what data it needs and it makes it easier to aggregate data from multiple sources.
+
+DynamoDB - Amazon DynamoDB is a fully managed proprietary NoSQL database service that supports key-value and document data structures.
 
 ## Implementation
 
@@ -155,6 +160,159 @@ You should now be able to test your application.
 If you tap the top right button that has appeared you should see GPS coordinates printed in the bottom left of the screen. Make sure to allow GPS permissions when using this app when asked!
 
 ![Android Emulator GPS coordinates screen](./images/gps-coordinates.png)
+
+### Storing GPS Coordinates on AWS
+
+#### Configure Amplify the GraphQL API
+
+Firstly, we'll need to provision an API that will allow us to interact with DynamoDB, so that we can store our GPS coordinates from the device.
+
+Within ```terminal```, run the following Amplify CLI command:
+
+``` bash
+amplify add api
+```
+
+Enter the following when prompted:
+
+``` bash
+? Please select from one of the below mentioned services: 
+    `GraphQL`
+? Provide API name: 
+    `gpsCoordinates`
+? Choose the default authorization type for the API:
+    `API key`
+? Enter a description for the API key:
+    `save gps coordinates to dynamodb`
+? After how many days from now the API key should expire (1-365): 
+    `7`
+? Do you want to configure advanced settings for the GraphQL API 
+    `No, I am done.`
+? Do you have an annotated GraphQL schema? 
+    `No`
+? Choose a schema template:
+    `Single object with fields (e.g., “Todo” with ID, name, description)`
+? Do you want to edit the schema now? 
+    `No`
+```
+
+The guided schema creation will output amplify/backend/api/{api_name}/schema.graphql containing the following:
+
+``` bash
+type Todo @model {
+  id: ID!
+  name: String!
+  description: String
+}
+```
+
+Replace the above code with the following within the schema file:
+
+``` bash
+type GPSCoordinates @model {
+  id: ID!
+  locationName: String!
+  longitude: Float!
+  latitude: Float!
+}
+```
+
+Generate model files and push your changes to the cloud, by executing the following command in your ```terminal```:
+
+``` bash
+amplify codegen models
+amplify push
+```
+
+To see the data structure on the aws console, type the following into ```terminal```:
+
+``` bash
+amplify console
+```
+
+And choose the Console option:
+
+``` bash
+? Which site do you want to open?
+    Amplify UI
+->  Console
+```
+
+You can now search for DynamoDB and see that your Table has been successfully created within the Tables section of DynamoDB:
+
+![DynamoDB AWS Console screen](./images/dynamo-validate-01.png)
+![DynamoDB AWS Console screen](./images/dynamo-validate-02.png)
+![DynamoDB AWS Console screen](./images/dynamo-validate-03.png)
+
+Feel free to check out the Items column, this is where we will see the data arrive later on!
+
+Let's move to the next step - adding the DynamoDB to our app. Add the following into the ```pubspec.yaml``` and run ```flutter pub get``` within ```terminal``` (if it doesn't automatically run when saving the file)
+
+``` dart
+... // amplify_analytics_pinpoint: '<1.0.0' (line 29)
+
+amplify_api: '<1.0.0'
+
+... // pubspec.yaml
+```
+
+Now open up the ```main.dart``` file and add the following import at the top:
+
+``` dart
+.. // import 'package:amplify_flutter/amplify.dart'; (line 7)
+
+import 'package:amplify_api/amplify_api.dart';
+
+... // main.dart
+``` 
+
+And add the following to the ```_configureAmplify()``` function:
+
+``` dart
+... // void _configureAmplify() async { (line 82)
+
+// Add the following line to add API plugin to your app
+Amplify.addPlugin(AmplifyAPI());
+
+... // main.dart
+```
+
+Next, open up ```gps_page.dart```
+
+``` dart
+... //  (line )
+
+void _addGPSLocationToDB() async {
+  try {
+      String graphQLDocument =
+          '''mutation CreateGPSLocation(\$locationName: String!, \$Latitude: Float, \$Longitude: Float) {
+                createGPSLocation(input: {locationName: \$locationName, Latitude: \$currentPositionLat, Longitude: \$currentPositionLon}) {
+                  id
+                  locationName
+                  Longitude
+                  Latitude
+                }
+          }''';
+      var variables = {
+        "locationName": "Current Location",
+        "currentPositionLat": currentPositionLat,
+        "currentPositionLon": currentPositionLon,
+      };
+      var request = GraphQLRequest<String>(document: graphQLDocument, variables: variables);
+
+      var operation = Amplify.API.mutate(request: request);
+      var response = await operation.response;
+
+      var data = response.data;
+
+      print('Mutation result: ' + data);
+  } on ApiException catch (e) {
+      print('Mutation failed: $e');
+  }
+}
+
+... // gps_page.dar
+```
 
 **Congratulations, you have finished the workshop!**
 
