@@ -19,11 +19,12 @@ This tutorial will not require any previous knowledge with AWS or any of its ser
 ## The modules
 
 Please work your way through each module, starting with prerequisites :
-* [Prerequisits](./prerequisites/README.md) - Prerequisits for the labs
+* [Prerequisites](./prerequisites/README.md) - Prerequisites for the labs
 * [Module 1](./module1/README.md) - Building your Flutter application
 * [Module 2](./module2/README.md) - Building your Amplify application
-* [Module 3](./module3/README.md) - Configuraing your Flutter application to authenticate against Amazon Cognito
-
+* [Module 3](./module3/README.md) - Configuring your Flutter application to authenticate against Amazon Cognito
+* [Module 4](./module4/README.md) - Calling GPS coordinates of device and saving the location to DynamoDB
+* [Optional: Module 5](./module5/README.md) - Display Google Maps showing GPS coordinates of the device
 
 ## Cleanup
  
@@ -33,6 +34,8 @@ Delete the AWS Amplify project within the AWS Amplify Console.
 ``` bash
 amplify delete
 ```
+
+We would also recommend deleting the Google Maps API key from Google Console if you completed Optional Lab 5 via the ``` Delete API keys``` step found here: https://developers.google.com/maps/api-key-best-practices
 
 ## Questions and contact
 

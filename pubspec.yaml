@@ -21,14 +21,16 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  camera: ^0.7.0
+  camera: ^0.8.0
   path:
   path_provider: ^1.6.27
   amplify_flutter: '<1.0.0'
-  amplify_core: '<1.0.0'
   amplify_auth_cognito: '<1.0.0'
   amplify_analytics_pinpoint: '<1.0.0'
+  amplify_datastore: '<1.0.0'
   cached_network_image: ^2.3.3
+  geolocator: ^6.2.1
+  google_maps_flutter: ^2.0.1
   flutter:
     sdk: flutter
 

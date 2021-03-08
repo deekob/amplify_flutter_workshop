@@ -19,7 +19,7 @@ Authentication - Authentication is the process of verifying and managing a user,
 The next step is to install Amplify as a dependency in our project so we can interface with the libraries.
 
 Back in Visual Studio Code, open **pubspec.yaml** and add the following dependency:
-``` javascript
+``` dart
 ... // dependencies: (line 23)
 
   amplify_core: '<1.0.0'
@@ -31,7 +31,7 @@ Back in Visual Studio Code, open **pubspec.yaml** and add the following dependen
 ```
 ### Configuring Flutter to integrate with Amplify
 We'll start by importing the dependencies into **main.dart**
-``` javascript
+``` dart
 ... // import 'app_flow.dart'; (line 6)
 
 import 'package:amplify_flutter/amplify.dart';
@@ -41,7 +41,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 ... // void main() {
 ```
 
-``` javascript
+``` dart
 .. // }  Widget build closing brace (line 81)
    void _configureAmplify() async {
     AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
@@ -56,7 +56,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
   }
 ```
 
-``` javascript
+``` dart
 ... // super.initState(); (line 25)
     _configureAmplify();
 ... // _authService.showLogin();
@@ -66,13 +66,13 @@ Back in the Create A Flutter App module, we implemented our AuthService to handl
 
 In **auth_service.dart** add an AuthCredentials property in AuthService:
 
-``` javascript
+``` dart
 ... // import 'auth_credentials.dart'; (line 2)
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 ```
 
-``` javascript
+``` dart
 .. // final authStateController = StreamController<AuthState>(); (line 17)
 AuthCredentials _credentials;
 ... // void showSignUp() {
@@ -82,7 +82,7 @@ This property will be used to keep the SignUpCredentials in memory during the si
 
 Update signUpWithCredentials to the following:
 
-``` javascript
+``` dart
   ... // } Closing brace of loginWithCredentials (line 34)
 
 // 1
@@ -125,7 +125,7 @@ void signUpWithCredentials(SignUpCredentials credentials) async {
 
 Update verifyCode to this:
 
-``` javascript
+``` dart
  ... // } Closing brace of signUpWithCredentials (line 68)
 
 // 1
@@ -154,7 +154,7 @@ void verifyCode(String verificationCode) async {
 
 We've implemented the sign up portion of our auth flow, but now we need to update the login part. Update loginWithCredentials to this:
 
-``` javascript
+``` dart
  ... // } Closing brace of show login (line 31)
 // 1
 void loginWithCredentials(AuthCredentials credentials) async {
@@ -183,7 +183,7 @@ void loginWithCredentials(AuthCredentials credentials) async {
 4. We should not reach this state in our app. If the user enters in the wrong credentials or gets any other error, it should result in our catch block.
 
 Now, update the logOut method:
-``` javascript
+``` dart
  ... // } Closing brace of verifyCode (line 102)
 
 void logOut() async {
@@ -204,7 +204,7 @@ void logOut() async {
 
 Lastly, we need to be able to automatically log the user in if they close the app but have already logged in during a previous session. Add this final function to AuthService.
 
-``` javascript
+``` dart
  ... // } Closing brace of logOut (line 114)
 void checkAuthStatus() async {
  try {
@@ -223,7 +223,7 @@ checkAuthStatus will attempt to get the current AuthSession; if it's successful,
 
 Finally, we are calling showLogin inside of the initState method of _MyAppState. In **main.dart** let's change that to checkAuthStatus:
 
-``` javascript
+``` dart
 ... // _configureAmplify(); (line 26)
 _authService.checkAuthStatus();
 ... // initState closing }
