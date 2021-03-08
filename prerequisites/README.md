@@ -6,7 +6,7 @@ You will need the following in order to execute this Workshop
 
 2. An [editor](https://code.visualstudio.com/) that is compatible with Flutter. This Workshop provides prescriptive guidance for Visual Studio Code. For optimal developer experience it is recommended to install `Dart` and `Flutter` [extensions in Visual Studio Code](https://code.visualstudio.com/docs/editor/extension-gallery).
 
-3. [Install](https://docs.amplify.aws/cli/start/install) Amplify CLI - This is the tool we will use to create and modify the AWS AMplify resources.
+3. [Install](https://docs.amplify.aws/cli/start/install) Amplify CLI - This is the tool we will use to create and modify the AWS Amplify resources.
 
 4. Configure Amplify CLI. 
 For further details you can [watch the video guide](https://docs.amplify.aws/cli/start/install#option-1-watch-the-video-guide) 
