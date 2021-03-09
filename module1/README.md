@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
 
 The UI of LoginPage is not finished, let's add it to the Navigator in **main.dart**.
 ``` dart
-... // home: Navigator( (line 20)
+... // home: Navigator( (line 21)
 
 pages: [MaterialPage(child: LoginPage())],
 
@@ -274,16 +274,16 @@ You'll see that there's no definition in scope for LoginPage() and SingupPage().
 
 ![undef classes](./images/undef_classes.png)
 
-Let's add those imports now to **main.dart**
+Let's add that import now to **main.dart**
 ``` dart
-... // import 'package:flutter/material.dart'; (line 1)
-import 'login_page.dart';
+
+... // import 'login_page.dart'; (line 2)
 import 'sign_up_page.dart';
 ```
 
 We also need to make a configuration update for Android, update minSdkVersion to 21 **./android/app/build.gradle**
 ``` dart
-... //        applicationId "com.example.workshop_app" (line 41)
+... //        applicationId "com.example.workshop_app" (line 37)
         minSdkVersion 21
 ... //         targetSdkVersion 29
 ```
@@ -387,7 +387,7 @@ home: StreamBuilder<AuthState>(
       }
     }),
     
-... // MaterialApp closing ); (line 33)
+... // MaterialApp closing ); (line 30)
 ```
 1. We wrapped our Navigator with a StreamBuilder that is expecting to observe a stream emitting AuthState.
 2. We access the AuthState stream by accessing it from the authStateController from the instance of AuthService.

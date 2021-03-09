@@ -32,7 +32,7 @@ Back in Visual Studio Code, open **pubspec.yaml** and add the following dependen
 ### Configuring Flutter to integrate with Amplify
 We'll start by importing the dependencies into **main.dart**
 ``` dart
-... // import 'app_flow.dart'; (line 6)
+... // import 'gps_page.dart'; (line 6)
 
 import 'package:amplify_flutter/amplify.dart';
 import 'amplifyconfiguration.dart';
