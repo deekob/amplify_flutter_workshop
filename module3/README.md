@@ -99,19 +99,17 @@ void signUpWithCredentials(SignUpCredentials credentials) async {
 
     // 4
     if (result.isSignUpComplete) {
-      loginWithCredentials(credentials);
-    } else {
       // 5
       this._credentials = credentials;
 
       // 6
       final state = AuthState(authFlowStatus: AuthFlowStatus.verification);
-      authStateController.add(state);
-    }
+        authStateController.add(state);
+      }
   // 7
-    } on AmplifyException catch (authError) {
+  } on AmplifyException catch (authError) {
       print('Failed to sign up - ${authError.message}');
-    }
+  }
 }
 ```
 

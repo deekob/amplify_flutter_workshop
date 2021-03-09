@@ -65,8 +65,6 @@ class AuthService {
 
       // 4
       if (result.isSignUpComplete) {
-        loginWithCredentials(credentials);
-      } else {
         // 5
         this._credentials = credentials;
 
@@ -74,7 +72,6 @@ class AuthService {
         final state = AuthState(authFlowStatus: AuthFlowStatus.verification);
         authStateController.add(state);
       }
-
       // 7
     } on AmplifyException catch (authError) {
       print('Failed to sign up - ${authError.message}');
