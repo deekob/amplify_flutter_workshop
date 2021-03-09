@@ -12,7 +12,7 @@ You will need the following in order to execute this Workshop
 For further details you can [watch the video guide](https://docs.amplify.aws/cli/start/install#option-1-watch-the-video-guide) 
 or follow [these instructions](https://docs.amplify.aws/cli/start/install#option-2-follow-the-instructions)
 
-5. Install [Flutter](https://flutter.dev/docs/get-started/install) version 1.20.0 or higher. Only install Flutter and add it to your path ( [Windows](https://flutter.dev/docs/get-started/install/windows#update-your-path) || [macOS](https://flutter.dev/docs/get-started/install/macos#update-your-path)) at this point, further configuration occurs in the following step.
+5. Install [Flutter](https://flutter.dev/docs/get-started/install) version 2.0.1 or higher. Only install Flutter and add it to your path ( [Windows](https://flutter.dev/docs/get-started/install/windows#update-your-path) || [macOS](https://flutter.dev/docs/get-started/install/macos#update-your-path)) at this point, further configuration occurs in the following step.
 
 6. Some basic experience with Android / iOS app development (i.e. familiarity with Android Studio interface such as launching Android Emulator).
 

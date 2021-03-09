@@ -162,6 +162,13 @@ pages: [MaterialPage(child: LoginPage())],
 
 The pages parameter takes a List<Page<dynamic>>, so we pass in a single MaterialPage where our LoginPage is the child.
 
+Now we need to import login_page.dart so that LoginPage can be accessed from main.dart.
+
+``` dart 
+... // import 'package:flutter/material.dart'; (line 1)
+import 'login_page.dart';
+```
+
 Now run the app (F5 in Visual Studio Code), this will usually take a few minutes to launch.
 
 ![Flutter Login Screen](./images/FlutterApp-Module1Photo2-small.13afe7ad2deebc36e6b9f65585340abf7b787957.png)
