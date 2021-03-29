@@ -42,7 +42,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 ```
 
 ``` dart
-.. // }  Widget build closing brace (line 81)
+.. // }  Widget build closing brace (line 92)
    void _configureAmplify() async {
     AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
     Amplify.addPlugins([authPlugin]);
