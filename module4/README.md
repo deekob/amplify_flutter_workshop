@@ -30,14 +30,15 @@ geolocator: ^6.2.1
 Add the following permission to your Android Manifest file, located in ```<project root>/android/app/src/main/AndroidManifest.xml```:
 
 ``` java
-... // <!-- io.flutter.app.FlutterApplication is an android.app.Application that calls FlutterMain.startInitialization(this); in its onCreate method. In most cases you can leave this as-is, but you if you want to provide additional functionality it is fine to subclass or reimplement FlutterApplication and put your custom class here. --> 
-... // (line 8)
+... // <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.workshop_app">
+... // (line 3)
 
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
-... // AndroidManifest.xml
+... // <application android:label=...
 ```
 
 If you are using an Android Emulator please set up a fake location for this lab:
