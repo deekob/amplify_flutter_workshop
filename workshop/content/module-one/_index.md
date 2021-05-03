@@ -9,7 +9,7 @@ pre = "<b> </b>"
 ## Introduction
 AWS Amplify is a suite of tools that allow developers to build apps quicker by providing easy to use libraries that make it possible to authenticate users, store files, capture analytics events, and much more, with just a few lines of code.
 
-In this module, you'll create and build out the UI of an app. This includes the sign-up flow, and page for XXX.
+In this module, you'll create and build out the UI of an app. This includes the sign-up flow, and page to execute our GPS logic that we will create later.
 
 This module will set the foundation of our app so the following modules can focus on the actual Amplify implementations for the specific category.
 

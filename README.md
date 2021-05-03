@@ -7,26 +7,18 @@ In this workshop, you will create a mobile application using AWS Amplify and Flu
 
 This tutorial will not require any previous knowledge with AWS or any of its services to follow along. However, there will be some more intermediate concepts covered when working with Flutter and Dart. 
 
+## Accessing Workshop content
+This workshop has been converted to Hugo format and a hosted [version can be found here](https://main.deyn9jyim4oju.amplifyapp.com/)
+
 ## The modules
 
-Please work your way through each module, starting with prerequisites :
-* [Prerequisites](./prerequisites/README.md) - Prerequisites for the labs
-* [Module 1](./module1/README.md) - Building your Flutter application
-* [Module 2](./module2/README.md) - Building your Amplify application
-* [Module 3](./module3/README.md) - Configuring your Flutter application to authenticate against Amazon Cognito
-* [Module 4](./module4/README.md) - Calling GPS coordinates of device and sdisplaying on screen
-* [Optional: Module 5](./module5/README.md) - Display Google Maps showing GPS coordinates of the device
+* Prerequisites for the labs
+* Building your Flutter application
+* Building your Amplify application
+* Configuring your Flutter application to authenticate against Amazon Cognito
+* Calling GPS coordinates of device and displaying on screen
+* Display Open Street Maps showing GPS coordinates of the device
 
-## Cleanup
- 
-It is recommended to co clean up all the resources created in this workshop once finished to reduce costs.
-
-Delete the AWS Amplify project within the AWS Amplify Console.
-``` bash
-amplify delete
-```
-
-We would also recommend deleting the Google Maps API key from Google Console if you completed Optional Lab 5 via the ``` Delete API keys``` step found here: https://developers.google.com/maps/api-key-best-practices
 
 ## Questions and contact
 
