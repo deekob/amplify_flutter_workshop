@@ -111,21 +111,3 @@ You should now be able to test your application.
 If you tap the top right button that has appeared you should see GPS coordinates printed in the bottom left of the screen. Make sure to allow GPS permissions when using this app when asked!
 
 ![Android Emulator GPS coordinates screen](/images/gps-coordinates.png)
-
-**Congratulations, you have finished the workshop!**
-
-You can either complete the Optional Lab 5 content, or clean up your AWS resources for the workshop now.
-
-If you want an extra challenge post workshop, we'd recommend you take a look at the following areas:
-
-1. Adding in Amplify Datastore, allowing you to have a database stored on the device allowing for offline / online syncing of data from DynamoDB and other database solutions: https://docs.amplify.aws/lib/datastore/getting-started/q/platform/flutter
-2. Using Amplify Analytics, allowing you to collect analytics from your app and store on AWS: https://docs.amplify.aws/lib/analytics/getting-started/q/platform/flutter
-3. Using Amplify Storage, allowing you to upload photos from a device: https://docs.amplify.aws/lib/storage/getting-started/q/platform/flutter
-
-### Cleanup
-It is recommended to co clean up all the resources created in this workshop once finished to reduce costs.
-
-Delete the AWS Amplify project within the AWS Amplify Console.
-``` bash
-amplify delete
-```
