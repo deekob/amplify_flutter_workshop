@@ -1,55 +1,10 @@
-# Module 4
-
-## Introduction
-In this module you will learn how to retrieve gps coordinates of a mobile devices location, and show this on google maps.
-
-## What You Will Learn
-* Ask for GPS location permissions of end user
-* Recieve GPS location of mobile device on Android / iOS
-
-## Key Concepts
-GPS Coordinates - GPS coordinates are a unique identifier of a precise geographic location on the earth, usually expressed in alphanumeric characters. Coordinates, in this context, are points of intersection in a grid system. GPS (global positioning system) coordinates are usually expressed as the combination of latitude and longitude.
-
-## Implementation
-
-### Accessing GPS Coordinates
-
-#### Add GPS location dependencies to Flutter
-The first step is to add GPS location dependencies as well as configure Android permissions needed for an end user to share a mobile device location.
-
-Add a GPS location library to your ```pubspec.yaml``` file and run ```flutter pub get``` within ```terminal``` (if it doesn't automatically run when saving the file):
-
-``` dart
-... // dependencies: (line 23)
-
-geolocator: ^6.2.1
-
-... // pubspec.yaml
-```
-
-Add the following permission to your Android Manifest file, located in ```<project root>/android/app/src/main/AndroidManifest.xml```:
-
-``` java
-... // <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.workshop_app">
-... // (line 3)
-
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
-... // <application android:label=...
-```
-
-If you are using an Android Emulator please set up a fake location for this lab:
-
-![Android Emulator screen](./images/android-location-set-1.png)
-
-1.  Open the Android Emulator and navigate to the settings screen
-
-![Android Emulator settings](./images/android-location-set-2.png)
-
-2. Within the location tab, type a location into the search and click save point. This will be where the emulator thinks that it is located when the app asks for a GPS location
++++
+title = "Adding GPS Location"
+date = 2020-04-15T14:32:10+01:00
+weight = 42
+chapter = true
+pre = "<b> </b>"
++++
 
 #### Add GPS location coordinate discovery to the app
 We will now add the code to request GPS location coordinates to the app.
@@ -155,7 +110,7 @@ You should now be able to test your application.
 
 If you tap the top right button that has appeared you should see GPS coordinates printed in the bottom left of the screen. Make sure to allow GPS permissions when using this app when asked!
 
-![Android Emulator GPS coordinates screen](./images/gps-coordinates.png)
+![Android Emulator GPS coordinates screen](/images/gps-coordinates.png)
 
 **Congratulations, you have finished the workshop!**
 
@@ -174,5 +129,3 @@ Delete the AWS Amplify project within the AWS Amplify Console.
 ``` bash
 amplify delete
 ```
-
-[<- Module 3](../module3/README.md) || [^ Navigate Home ^](../README.md) || [Module 5 ->](../module5/README.md)
