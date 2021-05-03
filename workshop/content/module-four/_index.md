@@ -7,7 +7,7 @@ pre = "<b> </b>"
 +++
 
 ## Introduction
-In this module you will learn how to retrieve gps coordinates of a mobile devices location, and show this on google maps.
+In this module you will learn how to retrieve gps coordinates of a mobile devices location, and show this on Open Street Maps.
 
 ## What You Will Learn
 * Ask for GPS location permissions of end user
