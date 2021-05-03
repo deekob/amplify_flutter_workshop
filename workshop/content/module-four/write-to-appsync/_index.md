@@ -80,3 +80,15 @@ Ensure the file is saved. The below step uses the newly created schema to create
 amplify push
 ```
 Once the AWS resources are fully deployed, the PGS lat and long values will be writen to a DynamoDB table upon pressing the maps button within your Flutter app.
+
+**Congratulations, you have finished the workshop!**
+
+You can either complete the Optional Lab 5 content, or clean up your AWS resources for the workshop now.
+
+### Cleanup
+It is recommended to co clean up all the resources created in this workshop once finished to reduce costs.
+
+Delete the AWS Amplify project within the AWS Amplify Console.
+``` bash
+amplify delete
+```
